@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import groq from "groq";
 import { createClient } from "next-sanity";
 
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 import Filter from "../components/Filter";
 import ProjectCards from "../components/ProjectCards";
 import Carousel from "../components/Carousel";

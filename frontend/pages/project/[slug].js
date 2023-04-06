@@ -6,7 +6,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import { createClient } from "next-sanity";
 
-import Layout from "../../components/Layout";
+import Layout from "../../components/layout";
 import MoreWork from "../../components/MoreWork";
 import Footer from "../../components/Footer";
 import useMousePosition from "../../hooks/useMousePosition";
