@@ -1,5 +1,4 @@
 import React, { useRef, useState } from "react";
-import Link from "next/link";
 
 const Filter = ({ categories, setCategoryName }) => {
   const categoryRef = useRef({});

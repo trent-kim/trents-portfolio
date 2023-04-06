@@ -1,5 +1,5 @@
 import '@/styles/globals.css'
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import { Piazzolla, IBM_Plex_Sans } from "next/font/google";
 
 import Seo from "../components/Seo";
