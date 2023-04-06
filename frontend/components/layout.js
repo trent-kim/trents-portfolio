@@ -1,11 +1,11 @@
 import React from "react";
-import Nav from "../components/Nav";
+import Nav from "./Nav";
 
 export const siteTitle = "Jaehee Cheong";
 
 export default function Layout({ children, theme, setTheme }) {
   const styles = {
-    divClass: "bg-background selection:bg-pink-300 flex justify-center",
+    divClass: "bg-background flex justify-center",
   };
   return (
     <main

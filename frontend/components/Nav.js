@@ -5,7 +5,7 @@ const Nav = ({ theme, setTheme }) => {
   return (
     <nav className="flex fixed justify-center w-full  z-30 mt-md px-md">
       <div className="p-md flex justify-between w-[1276px] border border-secondary bg-primary">
-        <Link href="/" className="font-serif text-4xl text-secondary">
+        <Link href="/" className="font-serif text-4xl text-secondary hover:text-primary">
           Trent Kim
         </Link>
         <div className="flex items-center gap-md">

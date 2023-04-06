@@ -14,6 +14,7 @@ const Footer = ({ about }) => {
                 target="_blank"
                 rel="noreferrer"
                 href={contact.url}
+                className="hover:text-primary"
               >
                 {contact.type}
                 <br></br>
@@ -23,6 +24,7 @@ const Footer = ({ about }) => {
               target="_blank"
               rel="noreferrer"
               href={"http://trentkim.com/trent-kim-cv.pdf"}
+              className="hover:text-primary"
             >
               Resume
             </Link>

@@ -1,7 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import Link from "next/link";
 
-const Footer = ({ projects, categoryName }) => {
+const ProjectCards = ({ projects, categoryName }) => {
   const projectRef = useRef({});
 
   useEffect(() => {
@@ -52,4 +52,4 @@ const Footer = ({ projects, categoryName }) => {
   );
 };
 
-export default Footer;
+export default ProjectCards;

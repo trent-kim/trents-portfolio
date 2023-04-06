@@ -6,7 +6,8 @@ import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import { createClient } from "next-sanity";
 
-import Layout from "../../components/layout";
+import Layout from "../../components/Layout";
+import MoreWork from "../../components/MoreWork";
 import Footer from "../../components/Footer";
 import useMousePosition from "../../hooks/useMousePosition";
 
@@ -31,7 +32,7 @@ const ptComponents = {
   },
 };
 
-const Project = ({ project, about, theme, setTheme }) => {
+const Project = ({ project, projects, about, theme, setTheme }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { x, y } = useMousePosition();
 
@@ -49,10 +50,11 @@ const Project = ({ project, about, theme, setTheme }) => {
     <Layout theme={theme} setTheme={setTheme}>
       <div className="w-[1300px] px-md pb-md flex flex-wrap gap-x-md">
         {/* <div className="flex mt-[77px] sticky top-[77px] border w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]"> */}
-        {/* <div className="flex flex-wrap gap-x-md gap-y-lg mt-lg"> */}
+        <div className="md:flex gap-x-md gap-y-lg mt-[77px]">
         {/* Project Card */}
-        <div className="mt-[77px] md:sticky md:top-[77px] w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]  md:h-[100px]">
-          <div className="group p-md border border-secondary flex flex-col bg-primary gap-md mt-lg">
+        <div className="w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]">
+        <div className="md:sticky md:top-[77px] pt-lg md:py-lg">
+          <div className="group p-md border border-secondary flex flex-col bg-primary gap-md">
             <Link
               href={`/`}
               className="hover:bg-primary bg-secondary w-[30px] h-[30px] border border-secondary rounded-full"
@@ -149,11 +151,9 @@ const Project = ({ project, about, theme, setTheme }) => {
             )}
           </div>
         </div>
+        </div>
         {/* /Project Card */}
-
-        {/* </div> */}
-        {/* </div> */}
-        <div className="mb-lg md:mt-[101px] flex flex-col gap-y-lg w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)]">
+        <div className="mb-lg flex flex-col gap-y-lg w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)] my-lg">
           {project?.images?.map((image, i) => (
             // <div  className=" border absolute w-full h-full">
             <Image
@@ -187,6 +187,12 @@ const Project = ({ project, about, theme, setTheme }) => {
             </div>
           </div>
         </div>
+        </div>
+        {/* </div> */}
+        
+        {projects && (
+        <MoreWork projects={projects} currentSlug={project?.slug}></MoreWork>
+        )}
         {about && (
         <Footer about={about}></Footer>
         )}
@@ -205,6 +211,7 @@ const client = createClient({
 const projectQuery = groq`*[_type == "project" && slug.current == $slug][0]{
     _id,
     title,
+    slug,
     year,
     "categories": categories[]->name,
     madeWith,
@@ -214,6 +221,16 @@ const projectQuery = groq`*[_type == "project" && slug.current == $slug][0]{
     links[],
     images
   }`;
+
+const projectsQuery = groq`*[_type == 'project']{
+  _id,
+  title,
+  slug,
+  year,
+  "categories": categories[]->name,
+  introduction,
+  thumbnail
+} | order(_updatedAt asc) | order(year desc)`;
 
 const aboutQuery = groq`*[_type == 'about']{
     _id,
@@ -241,10 +258,12 @@ export async function getStaticProps(context) {
   // It's important to default the slug so that it doesn't return "undefined"
   const { slug = "" } = context.params;
   const project = await client.fetch(projectQuery, { slug });
+  const projects = await client.fetch(projectsQuery);
   const about = await client.fetch(aboutQuery);
   return {
     props: {
       project,
+      projects,
       about,
     },
   };

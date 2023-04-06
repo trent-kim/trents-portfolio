@@ -6,7 +6,7 @@ import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import { createClient } from "next-sanity";
 
-import Layout from "../components/layout";
+import Layout from "../components/Layout";
 import Footer from "../components/Footer";
 import useMousePosition from "../hooks/useMousePosition";
 
@@ -24,9 +24,12 @@ const About = ({ about, theme, setTheme }) => {
   return (
     <Layout theme={theme} setTheme={setTheme}>
       <div className="w-[1300px] px-md pb-md flex flex-wrap gap-x-md">
+        {/* <div className="flex mt-[77px] sticky top-[77px] border w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]"> */}
+        <div className="md:flex gap-x-md gap-y-lg mt-[77px]">
         {/* Project Card */}
-        <div className="mt-[77px] md:sticky md:top-[77px] w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]  md:h-[100px]">
-          <div className="group p-md border border-secondary flex flex-col bg-primary gap-md mt-lg">
+        <div className="w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]">
+        <div className="md:sticky md:top-[77px] pt-lg md:py-lg">
+          <div className="group p-md border border-secondary flex flex-col bg-primary gap-md">
             <Link
               href={`/`}
               className="hover:bg-primary bg-secondary w-[30px] h-[30px] border border-secondary rounded-full"
@@ -46,6 +49,7 @@ const About = ({ about, theme, setTheme }) => {
                     target="_blank"
                     rel="noreferrer"
                     href={contact.url}
+                    className="hover:text-primary"
                   >
                     {contact.type}
                     <br></br>
@@ -55,6 +59,7 @@ const About = ({ about, theme, setTheme }) => {
                   target="_blank"
                   rel="noreferrer"
                   href={"http://trentkim.com/trent-kim-cv.pdf"}
+                  className="hover:text-primary"
                 >
                   Resume
                 </Link>
@@ -71,7 +76,7 @@ const About = ({ about, theme, setTheme }) => {
                       target="_blank"
                       rel="noreferrer"
                       href={feature.url}
-                      className="underline"
+                      className="underline hover:text-primary"
                     >
                       {feature.name}
                     </Link>
@@ -90,7 +95,7 @@ const About = ({ about, theme, setTheme }) => {
                       target="_blank"
                       rel="noreferrer"
                       href={education.schoolUrl}
-                      className="underline"
+                      className="underline hover:text-primary"
                     >
                       {education.school}
                     </Link>
@@ -103,9 +108,11 @@ const About = ({ about, theme, setTheme }) => {
             </div>
           </div>
         </div>
+        </div>
+        
         {/* /Project Card */}
 
-        <div className="mb-lg md:mt-[101px] flex flex-col gap-y-lg w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)]">
+        <div className="mb-lg flex flex-col gap-y-lg w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)] my-lg">
           <Image
             src={urlFor(about[0]?.image).url()}
             alt=""
@@ -131,6 +138,7 @@ const About = ({ about, theme, setTheme }) => {
               {about[0]?.image?.description}
             </div>
           </div>
+        </div>
         </div>
         <Footer about={about}></Footer>
       </div>
