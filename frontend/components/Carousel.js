@@ -16,15 +16,17 @@ const Carousel = ({ projects, theme }) => {
   const [runInterval, setRunInterval] = useState(true);
 
   // If its the first thumbnail, show 'New work' label
+  const projectsLength = projects.length;
+
   useEffect(() => {
-    setLength(projects.length);
+    setLength(projectsLength);
     console.log(currentIndex);
     if (currentIndex === 0) {
       newWorkRef.current.style.display = "block";
     } else {
       newWorkRef.current.style.display = "none";
     }
-  }, [projects.length, currentIndex]);
+  }, [projectsLength, currentIndex]);
 
   // Show previous and next thumbnail on click and hide the current; set the 'currentIndex' of the thumbnails
   const prev = () => {
@@ -64,17 +66,20 @@ const Carousel = ({ projects, theme }) => {
 
   // Styles for previous and next hover areas
   const leftRightStyles = { divClass: "w-1/3 lg:w-full h-full z-20 lg:z-0" };
+  let currentThumbnail = thumbnailRef.current[currentIndex];
+  let nextThumbnail = thumbnailRef.current[currentIndex + 1];
+  let firstThumbnail = thumbnailRef.current[0];
 
   useEffect(() => {
     if (runInterval) {
       const interval = setInterval(() => {
         currentIndex < length - 1 ? (
-          thumbnailRef.current[currentIndex].style.display = "none",
-          thumbnailRef.current[currentIndex + 1].style.display = "block",
+          currentThumbnail.style.display = "none",
+          nextThumbnail.style.display = "block",
           setCurrentIndex(currentIndex + 1)
          ) : (
-          thumbnailRef.current[currentIndex].style.display = "none",
-          thumbnailRef.current[0].style.display = "block",
+          currentThumbnail.style.display = "none",
+          firstThumbnail.style.display = "block",
           setCurrentIndex(0)
          )
       }, 3000);
@@ -82,8 +87,7 @@ const Carousel = ({ projects, theme }) => {
     } else {
       setRunInterval(false);
     }
-    
-  }, [ currentIndex, runInterval, thumbnailRef.current[currentIndex] ]);
+  }, [ length, currentIndex, runInterval, currentThumbnail, nextThumbnail, firstThumbnail ]);
 
   return (
     <div className="flex justify-center h-[600px] sm:h-[800px] items-center">

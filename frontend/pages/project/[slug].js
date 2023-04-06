@@ -33,7 +33,6 @@ const ptComponents = {
 
 const Project = ({ project, about, theme, setTheme }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const imageRef = useRef({});
   const { x, y } = useMousePosition();
 
   const imageDesRef = useRef(null);
@@ -110,9 +109,8 @@ const Project = ({ project, about, theme, setTheme }) => {
                   
                     {project?.collaborators?.map((collaborator, i) => (
                       collaborator?.url ? (
-                        <div className="font-sans text-sm text-secondary underline">
-                          <Link 
-                            key={i}
+                        <div key={i} className="font-sans text-sm text-secondary underline">
+                          <Link
                             target="_blank"
                             rel="noreferrer"
                             href={collaborator.url}
@@ -136,8 +134,12 @@ const Project = ({ project, about, theme, setTheme }) => {
             </div>
             {project?.links && (
               project?.links?.map((link, i) => (
-              <div>
-                <Link href={`${link.url}`}>
+              <div key={link.url}>
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href={`${link.url}`}
+                >
                   <button className="font-sans text-sm text-secondary border border-secondary rounded-full h-[30px] px-md hover:bg-secondary hover:text-primary z-30">
                     {link.label}
                   </button>
@@ -179,11 +181,15 @@ const Project = ({ project, about, theme, setTheme }) => {
             className="fixed hidden p-md border border-secondary z-20 bg-primary flex-col gap-md max-w-[calc((1/2*100%)-6px)] xl:max-w-[calc((1/3*100%)-8px)]"
           >
             <div className="font-sans text-sm text-secondary">
-              {project?.images[currentIndex]?.description}
+              {project?.images[currentIndex]?.description &&
+                project?.images[currentIndex]?.description
+              }
             </div>
           </div>
         </div>
+        {about && (
         <Footer about={about}></Footer>
+        )}
       </div>
     </Layout>
   );

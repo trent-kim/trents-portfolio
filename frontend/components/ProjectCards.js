@@ -3,9 +3,9 @@ import Link from "next/link";
 
 const Footer = ({ projects, categoryName }) => {
   const projectRef = useRef({});
-  let match = false;
 
   useEffect(() => {
+    let match = false;
     categoryName !== null &&
       (categoryName.innerText === "All"
         ? projects.map(
@@ -22,7 +22,7 @@ const Footer = ({ projects, categoryName }) => {
               ;{(match = false)}
             </>
           )));
-  }, [categoryName]);
+  }, [projects, categoryName]);
 
   return (
     <div className="flex flex-col justify-center mb-lg">

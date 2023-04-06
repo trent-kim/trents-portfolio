@@ -27,108 +27,101 @@ const About = ({ about, theme, setTheme }) => {
         {/* Project Card */}
         <div className="mt-[77px] md:sticky md:top-[77px] w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]  md:h-[100px]">
           <div className="group p-md border border-secondary flex flex-col bg-primary gap-md mt-lg">
-          <Link
-                  href={`/`}
-                  className="hover:bg-primary bg-secondary w-[30px] h-[30px] border border-secondary rounded-full"
-                ></Link>
-                <div className="font-serif text-4xl text-secondary">
-                  {about[0].title}
-                </div>
-                <div className="font-sans text-sm text-secondary">
-                  <PortableText
-                    value={about[0].bio}
-                    components={ptComponents}
-                  />
-                </div>
-                <div>
-                  <div className="font-serif text-xl text-secondary">Links</div>
-                  <div className="font-sans text-sm text-secondary underline">
-                    {about[0].contacts.map((contact) => (
-                      <Link
-                        key={contact.url}
-                        target="_blank"
-                        rel="noreferrer"
-                        href={contact.url}
-                      >
-                        {contact.type}
-                        <br></br>
-                      </Link>
-                    ))}
+            <Link
+              href={`/`}
+              className="hover:bg-primary bg-secondary w-[30px] h-[30px] border border-secondary rounded-full"
+            ></Link>
+            <div className="font-serif text-4xl text-secondary">
+              {about[0].title}
+            </div>
+            <div className="font-sans text-sm text-secondary">
+              <PortableText value={about[0].bio} components={ptComponents} />
+            </div>
+            <div>
+              <div className="font-serif text-xl text-secondary">Links</div>
+              <div className="font-sans text-sm text-secondary underline">
+                {about[0].contacts.map((contact) => (
+                  <Link
+                    key={contact.url}
+                    target="_blank"
+                    rel="noreferrer"
+                    href={contact.url}
+                  >
+                    {contact.type}
+                    <br></br>
+                  </Link>
+                ))}
+                <Link
+                  target="_blank"
+                  rel="noreferrer"
+                  href={"http://trentkim.com/trent-kim-cv.pdf"}
+                >
+                  Resume
+                </Link>
+              </div>
+            </div>
+            <div>
+              <div className="font-serif text-xl text-secondary">
+                Featured in
+              </div>
+              <div className="font-sans text-sm text-secondary">
+                {about[0].featuredIn.map((feature) => (
+                  <div key={feature.url}>
                     <Link
                       target="_blank"
                       rel="noreferrer"
-                      href={"http://trentkim.com/trent-kim-cv.pdf"}
+                      href={feature.url}
+                      className="underline"
                     >
-                      Resume
+                      {feature.name}
                     </Link>
+                    , {feature.year}
+                    <br></br>
                   </div>
-                </div>
-                <div>
-                  <div className="font-serif text-xl text-secondary">
-                    Featured in
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="font-serif text-xl text-secondary">Education</div>
+              <div className="font-sans text-sm text-secondary">
+                {about[0].education.map((education) => (
+                  <div key={education.schoolUrl}>
+                    <Link
+                      target="_blank"
+                      rel="noreferrer"
+                      href={education.schoolUrl}
+                      className="underline"
+                    >
+                      {education.school}
+                    </Link>
+                    ,&nbsp;
+                    <br></br>
+                    {education.degree}, {education.year}
                   </div>
-                  <div className="font-sans text-sm text-secondary">
-                    {about[0].featuredIn.map((feature) => (
-                      <div>
-                        <Link
-                          key={feature.url}
-                          target="_blank"
-                          rel="noreferrer"
-                          href={feature.url}
-                          className="underline"
-                        >
-                          {feature.name}
-                        </Link>
-                        , {feature.year}
-                        <br></br>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                <div>
-                  <div className="font-serif text-xl text-secondary">
-                    Education
-                  </div>
-                  <div className="font-sans text-sm text-secondary">
-                    {about[0].education.map((education) => (
-                      <div>
-                        <Link
-                          key={education.schoolUrl}
-                          target="_blank"
-                          rel="noreferrer"
-                          href={education.schoolUrl}
-                          className="underline"
-                        >
-                          {education.school}
-                        </Link>
-                        ,&nbsp;
-                        <br></br>
-                        {education.degree}, {education.year}
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
         {/* /Project Card */}
 
         <div className="mb-lg md:mt-[101px] flex flex-col gap-y-lg w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)]">
-            <Image
-              src={urlFor(about[0]?.image).url()}
-              alt=""
-              width={1000}
-              height={1000}
-              style={{
-                maxWidth: "100%",
-                height: "auto",
-              }}
-              onMouseEnter={() => {
-                imageMouseEnter();
-              }}
-              onMouseLeave={() => {
-                imageMouseLeave();
-              }}
-            />
+          <Image
+            src={urlFor(about[0]?.image).url()}
+            alt=""
+            width={1000}
+            height={1000}
+            style={{
+              maxWidth: "100%",
+              height: "auto",
+            }}
+            onMouseEnter={() => {
+              imageMouseEnter();
+            }}
+            onMouseLeave={() => {
+              imageMouseLeave();
+            }}
+          />
           <div
             ref={imageDesRef}
             style={{ left: `calc(${x}px + 22px)`, top: `${y}px` }}
@@ -141,7 +134,6 @@ const About = ({ about, theme, setTheme }) => {
         </div>
         <Footer about={about}></Footer>
       </div>
-
     </Layout>
   );
 };
