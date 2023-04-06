@@ -1,0 +1,25 @@
+.theme-first {
+    --color-background: #F5F5F5;
+    --color-primary: #F5F5F5;
+    --color-secondary: #1E1E1E;
+  }
+  
+  .theme-second {
+    --color-background: #FFFFFF;
+    --color-primary: #F5F5F5;
+    --color-secondary: #1E1E1E;
+  }
+  
+  .theme-third {
+    --color-background: #1E1E1E;
+    --color-primary: #1E1E1E;
+    --color-secondary: #F5F5F5;
+  }
+
+  /* p {
+    margin-bottom: 12px;
+  }
+
+  p:last-of-type {
+    margin-bottom: 0px;
+  } */
