@@ -23,7 +23,7 @@ const Footer = ({ about }) => {
             <Link
               target="_blank"
               rel="noreferrer"
-              href={"http://trentkim.com/trent-kim-cv.pdf"}
+              href={"http://trentkim.space/trent-kim-cv.pdf"}
               className="hover:text-primary"
             >
               Resume
