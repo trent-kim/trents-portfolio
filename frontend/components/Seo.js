@@ -13,7 +13,7 @@ const Seo = () => {
       <meta itemProp="name" content="Trent Kim"/>
       <meta name="application-name" content="Trent Kim"/>
       <meta name="og:site_name" content="Trent Kim"/> 
-      <link rel="icon" type="image/png" href='https://trentkim.space/favicon.ico'/>
+      <link rel="icon" type="image/png" href='https://trentkim.space/favicon.png'/>
       <meta property="og:image" href="https://trentkim.space/share.png"/>
       <meta property="og:image:secure_url" content="https://trentkim.space/share.png" /> 
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
