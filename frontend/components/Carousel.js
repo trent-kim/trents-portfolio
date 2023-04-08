@@ -20,7 +20,6 @@ const Carousel = ({ projects, theme }) => {
 
   useEffect(() => {
     setLength(projectsLength);
-    console.log(currentIndex);
     if (currentIndex === 0) {
       newWorkRef.current.style.display = "block";
     } else {
@@ -73,25 +72,30 @@ const Carousel = ({ projects, theme }) => {
   useEffect(() => {
     if (runInterval) {
       const interval = setInterval(() => {
-        currentIndex < length - 1 ? (
-          currentThumbnail.style.display = "none",
-          nextThumbnail.style.display = "block",
-          setCurrentIndex(currentIndex + 1)
-         ) : (
-          currentThumbnail.style.display = "none",
-          firstThumbnail.style.display = "block",
-          setCurrentIndex(0)
-         )
+        currentIndex < length - 1
+          ? ((currentThumbnail.style.display = "none"),
+            (nextThumbnail.style.display = "block"),
+            setCurrentIndex(currentIndex + 1))
+          : ((currentThumbnail.style.display = "none"),
+            (firstThumbnail.style.display = "block"),
+            setCurrentIndex(0));
       }, 3000);
       return () => clearInterval(interval);
     } else {
       setRunInterval(false);
     }
-  }, [ length, currentIndex, runInterval, currentThumbnail, nextThumbnail, firstThumbnail ]);
+  }, [
+    length,
+    currentIndex,
+    runInterval,
+    currentThumbnail,
+    nextThumbnail,
+    firstThumbnail,
+  ]);
 
   return (
     <div className="flex justify-center h-[600px] sm:h-[800px] items-center">
-      <div className="w-full lg:w-2/3 relative ">
+      <div className="w-full lg:w-2/3 relative">
         {projects.map(({ thumbnail, slug }, i) => {
           return (
             <div key={i} className="group/item relative min-w-full z-10">
@@ -119,6 +123,7 @@ const Carousel = ({ projects, theme }) => {
                 }}
               >
                 <Image
+                  priority
                   ref={(element) => (thumbnailRef.current[i] = element)}
                   src={urlFor(thumbnail).url()}
                   width={1000}

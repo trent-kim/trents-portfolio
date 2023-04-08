@@ -9,6 +9,7 @@ import Carousel from "../components/Carousel";
 import Footer from "../components/Footer";
 
 const Home = ({ projects, categories, about, theme, setTheme }) => {
+  // Track the current category to filter by.
   const [categoryName, setCategoryName] = useState(null);
 
   return (

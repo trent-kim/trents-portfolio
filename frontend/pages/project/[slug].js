@@ -49,158 +49,175 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
   return (
     <Layout theme={theme} setTheme={setTheme}>
       <div className="w-[1300px] px-md pb-md flex flex-wrap gap-x-md">
-        {/* <div className="flex mt-[77px] sticky top-[77px] border w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]"> */}
         <div className="md:flex gap-x-md gap-y-lg mt-[77px]">
-        {/* Project Card */}
-        <div className="w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]">
-        <div className="md:sticky md:top-[77px] pt-lg md:py-lg">
-          <div className="group p-md border border-secondary flex flex-col bg-primary gap-md">
-            <Link
-              href={`/`}
-              className="hover:bg-primary bg-secondary w-[30px] h-[30px] border border-secondary rounded-full"
-            ></Link>
-            <div className="font-serif text-4xl text-secondary">
-              {project?.title}
-            </div>
-            <div className="font-serif text-xl text-secondary">
-              {project?.year}
-            </div>
-            <div className="font-sans text-sm text-secondary">
-              {project?.introduction}
-            </div>
-            <div className="font-sans text-sm text-secondary">
-              <PortableText
-                value={project?.description}
-                components={ptComponents}
-              />
-            </div>
-            <div className="flex flex-col sm:flex-row gap-lg">
-              <div>
-                <div className="font-serif text-xl text-secondary ">
-                  Made with
+          {/* Project Card */}
+          <div className="w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]">
+            <div className="md:sticky md:top-[77px] pt-lg md:py-lg">
+              <div className="group p-md border border-secondary flex flex-col bg-primary gap-md">
+                {/* Home Button */}
+                <Link
+                  href={`/`}
+                  className="hover:bg-primary bg-secondary w-[30px] h-[30px] border border-secondary rounded-full"
+                ></Link>
+                {/* / Home Button */}
+                {/* Title */}
+                <div className="font-serif text-4xl text-secondary">
+                  {project?.title}
                 </div>
+                {/* / Title */}
+                {/* Year */}
+                <div className="font-serif text-xl text-secondary">
+                  {project?.year}
+                </div>
+                {/* / Year */}
+                {/* Introduction */}
                 <div className="font-sans text-sm text-secondary">
-                  {project?.madeWith?.map((i) => (
-                    <div key={i}>
-                      {i}
-                      <br></br>
+                  {project?.introduction}
+                </div>
+                {/* / Introduction */}
+                {/* Description */}
+                <div className="font-sans text-sm text-secondary">
+                  <PortableText
+                    value={project?.description}
+                    components={ptComponents}
+                  />
+                </div>
+                {/* /Description */}
+                {/* Details */}
+                <div className="flex flex-col sm:flex-row gap-lg">
+                  {/* Made with */}
+                  <div>
+                    <div className="font-serif text-xl text-secondary ">
+                      Made with
                     </div>
-                  ))}
-                </div>
-              </div>
-              <div>
-                <div className="font-serif text-xl text-secondary ">
-                  Category
-                </div>
-                <div className="font-sans text-sm text-secondary">
-                  {project?.categories?.map((category, i) => (
-                    <div key={i}>
-                      {category}
-                      <br></br>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div>
-              {project?.collaborators && (
-                <>
-                <div className="font-serif text-xl text-secondary ">
-                  Collaborators
-                </div>
-                <div className="font-sans text-sm text-secondary">
-                  
-                    {project?.collaborators?.map((collaborator, i) => (
-                      collaborator?.url ? (
-                        <div key={i} className="font-sans text-sm text-secondary underline">
-                          <Link
-                            target="_blank"
-                            rel="noreferrer"
-                            href={collaborator.url}
-                          >
-                            {collaborator.name}
-                            <br></br>
-                          </Link>
-                        </div>
-                      ) : (
+                    <div className="font-sans text-sm text-secondary">
+                      {project?.madeWith?.map((i) => (
                         <div key={i}>
-                          {collaborator.name}
+                          {i}
                           <br></br>
                         </div>
-                      )
-                    ))}
+                      ))}
+                    </div>
+                  </div>
+                  {/* / Made with */}
+                  {/* Categories */}
+                  <div>
+                    <div className="font-serif text-xl text-secondary ">
+                      Category
+                    </div>
+                    <div className="font-sans text-sm text-secondary">
+                      {project?.categories?.map((category, i) => (
+                        <div key={i}>
+                          {category}
+                          <br></br>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                  {/* /Categories */}
+                  {/* Collaborators */}
+                  <div>
+                    {project?.collaborators && (
+                      <>
+                        <div className="font-serif text-xl text-secondary ">
+                          Collaborators
+                        </div>
+                        <div className="font-sans text-sm text-secondary">
+                          {project?.collaborators?.map((collaborator, i) =>
+                            collaborator?.url ? (
+                              <div
+                                key={i}
+                                className="font-sans text-sm text-secondary underline"
+                              >
+                                <Link
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  href={collaborator.url}
+                                >
+                                  {collaborator.name}
+                                  <br></br>
+                                </Link>
+                              </div>
+                            ) : (
+                              <div key={i}>
+                                {collaborator.name}
+                                <br></br>
+                              </div>
+                            )
+                          )}
+                        </div>
+                      </>
+                    )}
+                  </div>
+                  {/* / Collaborators */}
                 </div>
-                </>
-              )}
+                {/* / Details */}
+                {/* Links */}
+                {project?.links &&
+                  project?.links?.map((link, i) => (
+                    <div key={link.url}>
+                      <Link
+                        target="_blank"
+                        rel="noreferrer"
+                        href={`${link.url}`}
+                      >
+                        <button className="font-sans text-sm text-secondary border border-secondary rounded-full h-[30px] px-md hover:bg-secondary hover:text-primary z-30">
+                          {link.label}
+                        </button>
+                      </Link>
+                    </div>
+                  ))}
+                {/* / Links */}
               </div>
-              
-            </div>
-            {project?.links && (
-              project?.links?.map((link, i) => (
-              <div key={link.url}>
-                <Link
-                  target="_blank"
-                  rel="noreferrer"
-                  href={`${link.url}`}
-                >
-                  <button className="font-sans text-sm text-secondary border border-secondary rounded-full h-[30px] px-md hover:bg-secondary hover:text-primary z-30">
-                    {link.label}
-                  </button>
-                </Link>
-              </div>
-              ))
-            )}
-          </div>
-        </div>
-        </div>
-        {/* /Project Card */}
-        <div className="mb-lg flex flex-col gap-y-lg w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)] my-lg">
-          {project?.images?.map((image, i) => (
-            // <div  className=" border absolute w-full h-full">
-            <Image
-              key={i}
-              src={urlFor(image).url()}
-              alt=""
-              width={1000}
-              height={1000}
-              style={{
-                maxWidth: "100%",
-                height: "auto",
-              }}
-              onMouseEnter={() => {
-                imageMouseEnter(i);
-              }}
-              onMouseLeave={() => {
-                imageMouseLeave();
-              }}
-            />
-            // </div>
-          ))}
-          <div
-            ref={imageDesRef}
-            style={{ left: `calc(${x}px + 22px)`, top: `${y}px` }}
-            className="fixed hidden p-md border border-secondary z-20 bg-primary flex-col gap-md max-w-[calc((1/2*100%)-6px)] xl:max-w-[calc((1/3*100%)-8px)]"
-          >
-            <div className="font-sans text-sm text-secondary">
-              {project?.images[currentIndex]?.description &&
-                project?.images[currentIndex]?.description
-              }
             </div>
           </div>
+          {/* /Project Card */}
+          {/* Images */}
+          <div className="mb-lg flex flex-col gap-y-lg w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)] my-lg">
+            {project?.images?.map((image, i) => (
+              <Image
+                key={i}
+                src={urlFor(image).url()}
+                alt=""
+                width={1000}
+                height={1000}
+                style={{
+                  maxWidth: "100%",
+                  height: "auto",
+                }}
+                onMouseEnter={() => {
+                  imageMouseEnter(i);
+                }}
+                onMouseLeave={() => {
+                  imageMouseLeave();
+                }}
+              />
+            ))}
+            {/* Image Descriptions */}
+            <div
+              ref={imageDesRef}
+              style={{ left: `calc(${x}px + 22px)`, top: `${y}px` }}
+              className="fixed hidden p-md border border-secondary z-20 bg-primary flex-col gap-md max-w-[calc((1/2*100%)-6px)] xl:max-w-[calc((1/3*100%)-8px)]"
+            >
+              <div className="font-sans text-sm text-secondary">
+                {project?.images[currentIndex]?.description &&
+                  project?.images[currentIndex]?.description}
+              </div>
+            </div>
+            {/* / Image Descriptions */}
+          </div>
+          {/* / Images */}
         </div>
-        </div>
-        {/* </div> */}
-        
         {projects && (
-        <MoreWork projects={projects} currentSlug={project?.slug}></MoreWork>
+          <MoreWork projects={projects} currentSlug={project?.slug}></MoreWork>
         )}
-        {about && (
-        <Footer about={about}></Footer>
-        )}
+        {about && <Footer about={about}></Footer>}
       </div>
     </Layout>
   );
 };
 
+// sanity client
 const client = createClient({
   projectId: "jdq7aeh0",
   dataset: "production",
@@ -208,6 +225,7 @@ const client = createClient({
   useCdn: true,
 });
 
+// queries
 const projectQuery = groq`*[_type == "project" && slug.current == $slug][0]{
     _id,
     title,

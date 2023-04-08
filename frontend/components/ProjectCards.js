@@ -4,6 +4,7 @@ import Link from "next/link";
 const ProjectCards = ({ projects, categoryName }) => {
   const projectRef = useRef({});
 
+  // Display project cards that match the selected filter, hide project cards that do not.
   useEffect(() => {
     let match = false;
     categoryName !== null &&
@@ -12,6 +13,8 @@ const ProjectCards = ({ projects, categoryName }) => {
             ({}, i) => (projectRef.current[i].style.display = "block")
           )
         : projects.map(({ categories }, i) => (
+            // If one of the project's categories matches the selected filter, then display and let 'match' be true. Else, only hide if match is false.
+            // After mapping the project's categories, set 'match back to false.
             <>
               {categories.map((category) =>
                 category === categoryName.innerText

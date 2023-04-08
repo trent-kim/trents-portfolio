@@ -1,12 +1,13 @@
 import React from "react";
+
 import Nav from "./Nav";
 
-export const siteTitle = "Jaehee Cheong";
-
 export default function Layout({ children, theme, setTheme }) {
+  // Styles for main children
   const styles = {
     divClass: "bg-background flex justify-center",
   };
+
   return (
     <main
       className={`${styles.divClass} ${

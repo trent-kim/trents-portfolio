@@ -4,6 +4,8 @@ const Filter = ({ categories, setCategoryName }) => {
   const categoryRef = useRef({});
   const [currentFilter, setCurrentFilter] = useState(0);
 
+  // Set the current category for the filter and project cards.
+  // Set underline for the current category.
   const toggleFilterButton = (i) => {
     setCurrentFilter(i);
     setCategoryName(categoryRef.current[i]);
@@ -17,6 +19,7 @@ const Filter = ({ categories, setCategoryName }) => {
     categoryRef.current[i].style.textDecoration = "underline";
   };
 
+  // On hover, underline category
   const filterMouseOver = (i) => {
     categoryRef.current[i].style.textDecoration = "underline";
   };
