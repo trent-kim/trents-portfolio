@@ -3,7 +3,7 @@ import Link from "next/link";
 
 const Footer = ({ about }) => {
   return (
-    <div className="p-md flex bg-primary w-full border border-secondary z-20">
+    <div className="p-md flex bg-primary w-full border border-secondary z-20 justify-between items-end">
       <div className="flex flex-col gap-lg">
         <div>
           <div className="font-serif text-xl text-secondary">Links</div>
@@ -61,6 +61,14 @@ const Footer = ({ about }) => {
               {about[0]?.updated}
             </div>
           </div>
+          
+        </div>
+        
+        
+      </div>
+      <div>
+        <div className="font-sans text-sm text-secondary">
+          &#169; 2023 Trent Kim
         </div>
       </div>
     </div>

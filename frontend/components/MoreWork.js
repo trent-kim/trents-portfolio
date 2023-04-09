@@ -19,29 +19,59 @@ const MoreWork = ({ projects, currentSlug }) => {
         width > 1280 &&
           (currentProject === 0
             ? ((projectRef.current[currentProject].style.display = "none"),
-              i < currentProject + 4
+              i <= currentProject + 3
                 ? (projectRef.current[i].style.display = "block")
-                : (projectRef.current[i].style.display = "none"))
-            : i < currentProject || i < currentProject + 3
-            ? (projectRef.current[i].style.display = "block")
-            : (projectRef.current[i].style.display = "none")),
+                : (projectRef.current[i].style.display = "none"),
+                console.log("first"))
+
+            : currentProject === projects.length - 1
+                ? (((i === 0) || (i === 1) || (i === currentProject - 1))
+                  ? (projectRef.current[i].style.display = "block")
+                  : (projectRef.current[i].style.display = "none"),
+                  console.log("second"))
+
+                : currentProject === projects.length - 2
+                  ? (((i === 0) || (i === currentProject - 1) || (i === currentProject + 1))
+                    ? (projectRef.current[i].style.display = "block")
+                    : (projectRef.current[i].style.display = "none"),
+                    console.log("third"))
+
+                  : ((i === currentProject - 1) || (i === currentProject + 1) || (i === currentProject + 2))
+                    ? (projectRef.current[i].style.display = "block")
+                    : (projectRef.current[i].style.display = "none")
+          ),
+            
         // If the window width is md, display the previous project and the next project.
         width < 1280 &&
           width > 768 &&
           (currentProject === 0
             ? ((projectRef.current[currentProject].style.display = "none"),
-              i < currentProject + 3
+              i <= currentProject + 2
                 ? (projectRef.current[i].style.display = "block")
-                : (projectRef.current[i].style.display = "none"))
-            : i < currentProject || i < currentProject + 2
-            ? (projectRef.current[i].style.display = "block")
-            : (projectRef.current[i].style.display = "none")),
+                : (projectRef.current[i].style.display = "none"),
+                console.log("first"))
+
+            : currentProject === projects.length - 1
+                ? (((i === 0) || (i === currentProject - 1))
+                  ? (projectRef.current[i].style.display = "block")
+                  : (projectRef.current[i].style.display = "none"),
+                  console.log("second"))
+
+                : ((i === currentProject - 1) || (i === currentProject + 1))
+                  ? (projectRef.current[i].style.display = "block")
+                  : (projectRef.current[i].style.display = "none")
+          ),
         // If the window width is sm, display the next project.
         width < 768 &&
-          ((projectRef.current[currentProject].style.display = "none"),
-          i < currentProject + 2
-            ? (projectRef.current[i].style.display = "block")
-            : (projectRef.current[i].style.display = "none")),
+        (currentProject === projects.length - 1
+              ? i === 0
+                ? (projectRef.current[i].style.display = "block")
+                : (projectRef.current[i].style.display = "none")
+
+              : i === currentProject + 1
+                ? (projectRef.current[i].style.display = "block")
+                : (projectRef.current[i].style.display = "none")
+        ),
         // Hide the current project
         currentProject &&
           (projectRef.current[currentProject].style.display = "none")
