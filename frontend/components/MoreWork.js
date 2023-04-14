@@ -81,7 +81,7 @@ const MoreWork = ({ projects, currentSlug }) => {
 
   return (
     <div className="w-full">
-      <div className="p-md mb-lg flex bg-primary w-full border border-secondary font-serif text-xl">
+      <div className="p-md mb-lg flex bg-primary w-full border border-secondary font-serif text-xl text-secondary">
         More work
       </div>
       <div className="flex flex-col justify-center mb-lg">

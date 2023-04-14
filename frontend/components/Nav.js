@@ -8,9 +8,24 @@ const Nav = ({ theme, setTheme }) => {
         {/* Home Button */}
         <Link
           href="/"
-          className="font-serif text-4xl text-secondary hover:text-primary"
+          className="group font-serif text-4xl text-secondary  m-[0]"
         >
-          Trent Kim
+          Tr
+          <span className="absolute group-hover:rotate-[-15deg] transition origin-bottom duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
+            e
+          </span>
+          <span className="text-primary">e</span>n
+          <span className="absolute group-hover:rotate-[-13deg] transition origin-bottom duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
+            t
+          </span>
+          <span className="text-primary">t</span> K
+          <span className="inline-block">
+            <span className="absolute top-[-9px] block group-hover:translate-y-[4.4px] transition duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
+              .
+            </span>
+            <span className="block">ı</span>
+          </span>
+          m
         </Link>
         {/* / Home Button */}
         {/* Left Side */}
