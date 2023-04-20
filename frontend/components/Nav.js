@@ -11,16 +11,16 @@ const Nav = ({ theme, setTheme }) => {
           className="group font-serif text-4xl text-secondary  m-[0]"
         >
           Tr
-          <span className="absolute group-hover:rotate-[-15deg] transition origin-bottom duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
+          <span className="absolute group-hover:rotate-[-15deg] transition-transform origin-bottom duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
             e
           </span>
           <span className="text-primary">e</span>n
-          <span className="absolute group-hover:rotate-[-13deg] transition origin-bottom duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
+          <span className="absolute group-hover:rotate-[-13deg] transition-transform origin-bottom duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
             t
           </span>
           <span className="text-primary">t</span> K
           <span className="inline-block">
-            <span className="absolute top-[-9px] block group-hover:translate-y-[4.4px] transition duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
+            <span className="absolute top-[-9px] block group-hover:translate-y-[4.4px] transition-transform duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
               .
             </span>
             <span className="block">ı</span>

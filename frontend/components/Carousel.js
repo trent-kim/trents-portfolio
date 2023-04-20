@@ -123,7 +123,7 @@ const Carousel = ({ projects, theme }) => {
                 }}
               >
                 <Image
-                  priority
+                  eager
                   ref={(element) => (thumbnailRef.current[i] = element)}
                   src={urlFor(thumbnail).url()}
                   width={1000}
