@@ -128,8 +128,8 @@ export default defineType({
               type: 'string',
             },
             {
-              name: 'video',
-              title: 'Is this a video?',
+              name: 'isVideo',
+              title: 'Video?',
               type: 'boolean',
             }
           ],
