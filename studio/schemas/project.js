@@ -126,6 +126,11 @@ export default defineType({
               name: 'description',
               title: 'Description',
               type: 'string',
+            },
+            {
+              name: 'video',
+              title: 'Is this a video?',
+              type: 'boolean',
             }
           ],
         },
