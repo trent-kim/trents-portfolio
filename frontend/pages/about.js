@@ -104,19 +104,19 @@ const About = ({ about, theme, setTheme }) => {
                     Education
                   </div>
                   <div className="font-sans text-sm text-secondary">
-                    {about[0].education.map((education) => (
-                      <div key={education.schoolUrl}>
+                    {about[0].education.map((school) => (
+                      <div key={school.url}>
                         <Link
                           target="_blank"
                           rel="noreferrer"
-                          href={education.schoolUrl}
+                          href={school.url}
                           className="underline hover:text-primary"
                         >
-                          {education.school}
+                          {school.name}
                         </Link>
                         ,&nbsp;
                         <br></br>
-                        {education.degree}, {education.year}
+                        {school.degree}, {school.year}
                       </div>
                     ))}
                   </div>

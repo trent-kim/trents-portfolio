@@ -77,7 +77,7 @@ const MoreWork = ({ projects, currentSlug }) => {
           (projectRef.current[currentProject].style.display = "none")
       )
     );
-  }, [projects, currentProject, setCurrentProject, width]);
+  }, [projects, currentProject, setCurrentProject, width, currentSlug]);
 
   return (
     <div className="w-full">

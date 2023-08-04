@@ -49,7 +49,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
 
   return (
     <Layout theme={theme} setTheme={setTheme}>
-      <Nav about={about} theme={theme} setTheme={setTheme}></Nav>
+      {about && <Nav about={about} theme={theme} setTheme={setTheme}></Nav>}
       <div className="w-[1300px] px-md pb-md flex flex-wrap gap-x-md">
         <div className="lg:flex gap-x-md gap-y-lg mt-[68px]">
           {/* Project Card */}
