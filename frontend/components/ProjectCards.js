@@ -38,7 +38,7 @@ const ProjectCards = ({ projects, categoryName }) => {
               href={`/project/${encodeURIComponent(slug.current)}`}
               className="w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)] bg-primary"
             >
-              <div className="group p-md border border-secondary flex flex-col gap-md">
+              <div className="group p-md border border-secondary flex flex-col gap-lg">
                 <div className="group-hover:bg-secondary w-[30px] h-[30px] border border-secondary rounded-full"></div>
                 <div className="font-serif text-4xl text-secondary">
                   {title}

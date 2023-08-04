@@ -1,8 +1,10 @@
 import "@/styles/globals.css";
 import React, { useState, useEffect } from "react";
 import { Piazzolla, IBM_Plex_Sans } from "next/font/google";
+import { useRouter } from 'next/router'
 
 import Seo from "../components/Seo";
+import Loader from '../components/Loader';
 
 // Typefaces
 const piazzolla = Piazzolla({
@@ -18,18 +20,37 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 const App = ({ Component, pageProps }) => {
-  const [theme, setTheme] = useState(0);
+  // If routing, set loading to true. If not, set loading to false.
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
+
+  useEffect(() => {
+    const handleRouteChange = (url) => {
+      setLoading(true)
+    }
+
+    const handleRouteChangeComplete = () => {
+      setLoading(false)
+    }
+
+    router.events.on('routeChangeStart', handleRouteChange)
+    router.events.on('routeChangeComplete', handleRouteChangeComplete)
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChange)
+      router.events.off('routeChangeComplete', handleRouteChangeComplete)
+    }
+  }, [router.events])
 
   // Set theme based on the number of times the theme button in Nav has been clicked
+  const [theme, setTheme] = useState(0);
+  
   useEffect(() => {
     if (theme === 3) {
       setTheme(0);
     }
   }, [theme]);
 
-  const styles = {
-    divClass: "bg-background",
-  };
   return (
     <>
       <Seo></Seo>
@@ -48,7 +69,13 @@ const App = ({ Component, pageProps }) => {
           }
         `}
       </style>
-      <Component theme={theme} setTheme={setTheme} {...pageProps} />
+      <>
+        {loading ? 
+          <Loader/> 
+          : 
+          <Component theme={theme} setTheme={setTheme} {...pageProps} />
+        }
+      </>
     </>
   );
 };

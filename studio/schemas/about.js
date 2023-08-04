@@ -20,6 +20,11 @@ export default defineType({
       },
     }),
     defineField({
+      name: 'introduction',
+      title: 'Introduction',
+      type: 'string',
+    }),
+    defineField({
       name: 'bio',
       title: 'Bio',
       type: 'blockContent',
@@ -86,18 +91,18 @@ export default defineType({
       type: 'array',
       of: [
           {
-            name: 'education',
-            title: 'Education',
+            name: 'school',
+            title: 'School',
             type: 'document',
             fields: [
               defineField({
-                name: 'school',
-                title: 'School',
+                name: 'name',
+                title: 'Name',
                 type: 'string',
               }),
               defineField({
-                name: 'schoolUrl',
-                title: 'School URL',
+                name: 'url',
+                title: 'URL',
                 type: 'url',
               }),
               defineField({

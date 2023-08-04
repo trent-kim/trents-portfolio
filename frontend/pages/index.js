@@ -6,7 +6,10 @@ import Layout from "../components/layout";
 import Filter from "../components/Filter";
 import ProjectCards from "../components/ProjectCards";
 import Carousel from "../components/Carousel";
+import CarouselTwo from "../components/Carousel2";
 import Footer from "../components/Footer";
+import Nav from "../components/Nav";
+import About from "../components/About";
 
 const Home = ({ projects, categories, about, theme, setTheme }) => {
   // Track the current category to filter by.
@@ -14,9 +17,16 @@ const Home = ({ projects, categories, about, theme, setTheme }) => {
 
   return (
     <Layout theme={theme} setTheme={setTheme}>
-      <div className="w-[1300px] px-md pb-md">
-        <div className="w-full sticky mt-[77px]">
-          <Carousel projects={projects} theme={theme}></Carousel>
+      <Nav about={about} theme={theme} setTheme={setTheme}></Nav>
+      <div className="w-[1300px] px-md pb-md mt-[77px]">
+        <About 
+        about={about}
+        theme={theme}
+        setTheme={setTheme}
+        >
+        </About>
+        <div className="w-full my-lg">
+          <CarouselTwo projects={projects} theme={theme}></CarouselTwo>
         </div>
         <Filter
           categories={categories}
@@ -60,9 +70,11 @@ const categoryQuery = groq`*[_type == 'category']{
 const aboutQuery = groq`*[_type == 'about']{
   _id,
   title,
+  introduction,
   bio,
   contacts[],
   featuredIn[],
+  education[],
   madeWith[],
   typefacesUsed[],
   updated

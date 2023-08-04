@@ -18,7 +18,7 @@ export default function Layout({ children, theme, setTheme }) {
           : "theme-third"
       }`}
     >
-      <Nav theme={theme} setTheme={setTheme}></Nav>
+      
       {children}
     </main>
   );

@@ -25,11 +25,11 @@ const Seo = () => {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta
         name="description"
-        content="I'm web designer and developer who enjoy creating compelling online experiences and flexible design systems surrounding creative identities and storytelling."
+        content="Trent Kim is a designer and developer based in Brooklyn, NY creating compelling online experiences and design systems surrounding creative identities and storytelling."
       />
       <meta
         property="og:description"
-        content="I'm web designer and developer who enjoy creating compelling online experiences and flexible design systems surrounding creative identities and storytelling."
+        content="Trent Kim is a designer and developer based in Brooklyn, NY creating compelling online experiences and design systems surrounding creative identities and storytelling."
       />
       <meta property="og:locale" content="en_US" />
       <meta property="og:type" content="website" />

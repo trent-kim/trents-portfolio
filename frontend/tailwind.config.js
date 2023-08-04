@@ -10,7 +10,7 @@ module.exports = {
     colors: {
       transparent: 'transparent',
       current: 'currentColor',
-      'white': '#F5F5F5',
+      'white': '#E6E6E6',
       'black': '#1E1E1E',
     },
     textColor: {
@@ -37,6 +37,30 @@ module.exports = {
         'rightArrowDark': 'url(../public/right-arrow[dark].svg), pointer',
         'leftArrowDark': 'url(../public/left-arrow[dark].svg), pointer',
         'upArrowDark': 'url(../public/up-arrow[dark].svg), pointer',
+      },
+      animation: {
+        marquee: 'marquee 25s linear infinite',
+        marquee2: 'marquee2 25s linear infinite',
+        fadeIn: 'fadeIn 1s linear once',
+        fadeOut: 'fadeOut 1s linear once',
+      },
+      keyframes: {
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(100%)' },
+        },
+        marquee2: {
+          '0%': { transform: 'translateX(-100%)' },
+          '100%': { transform: 'translateX(0%)' },
+        },
+        fadeIn: {
+          '0%': { transform: 'opacity(0%)' },
+          '100%': { transform: 'opacity(100%)' },
+        },
+        fadeOut: {
+          '0%': { transform: 'opacity(100%)' },
+          '100%': { transform: 'opacity(0%)' },
+        },
       },
     },
     spacing: {

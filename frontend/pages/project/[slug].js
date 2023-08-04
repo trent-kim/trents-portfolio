@@ -7,6 +7,7 @@ import { PortableText } from "@portabletext/react";
 import { createClient } from "next-sanity";
 
 import Layout from "../../components/layout";
+import Nav from "../../components/Nav"
 import MoreWork from "../../components/MoreWork";
 import Footer from "../../components/Footer";
 import useMousePosition from "../../hooks/useMousePosition";
@@ -48,12 +49,13 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
 
   return (
     <Layout theme={theme} setTheme={setTheme}>
+      <Nav about={about} theme={theme} setTheme={setTheme}></Nav>
       <div className="w-[1300px] px-md pb-md flex flex-wrap gap-x-md">
-        <div className="md:flex gap-x-md gap-y-lg mt-[77px]">
+        <div className="lg:flex gap-x-md gap-y-lg mt-[68px]">
           {/* Project Card */}
-          <div className="w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]">
-            <div className="md:sticky md:top-[77px] pt-lg md:py-lg">
-              <div className="group p-md border border-secondary flex flex-col bg-primary gap-md">
+          <div className="w-full lg:w-[calc((1/2*100%)-6px)] xl:w-[calc((1/3*100%)-8px)]">
+            <div className="lg:sticky lg:top-[68px] pt-lg lg:py-lg">
+              <div className="group p-md border border-secondary flex flex-col bg-primary gap-lg">
                 {/* Home Button */}
                 <Link
                   href={`/`}
@@ -70,23 +72,25 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                   {project?.year}
                 </div>
                 {/* / Year */}
-                {/* Introduction */}
-                <div className="font-sans text-sm text-secondary">
-                  {project?.introduction}
+                <div className="flex flex-col gap-md">
+                  {/* Introduction */}
+                  <div className="font-sans text-sm text-secondary">
+                    {project?.introduction}
+                  </div>
+                  {/* / Introduction */}
+                  {/* Description */}
+                  <div className="font-sans text-sm text-secondary">
+                    <PortableText
+                      value={project?.description}
+                      components={ptComponents}
+                    />
+                  </div>
+                  {/* /Description */}
                 </div>
-                {/* / Introduction */}
-                {/* Description */}
-                <div className="font-sans text-sm text-secondary">
-                  <PortableText
-                    value={project?.description}
-                    components={ptComponents}
-                  />
-                </div>
-                {/* /Description */}
                 {/* Details */}
-                <div className="flex flex-col sm:flex-row gap-lg">
+                <div className="flex flex-wrap flex-col sm:flex-row gap-lg">
                   {/* Made with */}
-                  <div>
+                  <div className="w-full sm:w-[calc((1/3*100%)-16px)] xl:w-[calc((1/2*100%)-12px)]">
                     <div className="font-serif text-xl text-secondary ">
                       Made with
                     </div>
@@ -101,7 +105,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                   </div>
                   {/* / Made with */}
                   {/* Categories */}
-                  <div>
+                  <div className="w-full sm:w-[calc((1/3*100%)-16px)] xl:w-[calc((1/2*100%)-12px)]">
                     <div className="font-serif text-xl text-secondary ">
                       Category
                     </div>
@@ -116,39 +120,40 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                   </div>
                   {/* /Categories */}
                   {/* Collaborators */}
-                  <div>
+                  <>
                     {project?.collaborators && (
-                      <>
+                      <div className="w-full sm:w-[calc((1/3*100%)-16px)] xl:w-[calc((1/2*100%)-12px)]">
                         <div className="font-serif text-xl text-secondary ">
                           Collaborators
                         </div>
-                        <div className="font-sans text-sm text-secondary">
-                          {project?.collaborators?.map((collaborator, i) =>
-                            collaborator?.url ? (
-                              <div
-                                key={i}
-                                className="font-sans text-sm text-secondary underline"
+                        {project?.collaborators?.map((collaborator, i) =>
+                          collaborator?.url ? (
+                            <div
+                              key={i}
+                              className="font-sans text-sm text-secondary underline"
+                            >
+                              <Link
+                                target="_blank"
+                                rel="noreferrer"
+                                href={collaborator.url}
                               >
-                                <Link
-                                  target="_blank"
-                                  rel="noreferrer"
-                                  href={collaborator.url}
-                                >
-                                  {collaborator.name}
-                                  <br></br>
-                                </Link>
-                              </div>
-                            ) : (
-                              <div key={i}>
                                 {collaborator.name}
                                 <br></br>
-                              </div>
-                            )
-                          )}
-                        </div>
-                      </>
+                              </Link>
+                            </div>
+                          ) : (
+                            <div
+                              key={i}
+                              className="font-sans text-sm text-secondary"
+                            >
+                              {collaborator.name}
+                              <br></br>
+                            </div>
+                          )
+                        )}
+                      </div>
                     )}
-                  </div>
+                  </>
                   {/* / Collaborators */}
                 </div>
                 {/* / Details */}
@@ -173,7 +178,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
           </div>
           {/* /Project Card */}
           {/* Images */}
-          <div className="mb-lg flex flex-col gap-y-lg w-full md:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)] my-lg">
+          <div className="border border-secondary bg-primary p-md mb-lg flex flex-col gap-y-lg w-full lg:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)] my-lg">
             {project?.images?.map((image, i) => (
               <Image
                 key={i}
@@ -197,7 +202,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
             <div
               ref={imageDesRef}
               style={{ left: `calc(${x}px + 22px)`, top: `${y}px` }}
-              className="fixed hidden p-md border border-secondary z-20 bg-primary flex-col gap-md max-w-[calc((1/2*100%)-6px)] xl:max-w-[calc((1/3*100%)-8px)]"
+              className="fixed hidden p-md border border-secondary mr-md z-20 bg-primary flex-col gap-md max-w-[calc((1/2*100%)-6px)] xl:max-w-[calc((1/3*100%)-8px)]"
             >
               <div className="font-sans text-sm text-secondary">
                 {project?.images[currentIndex]?.description &&

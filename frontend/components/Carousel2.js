@@ -6,7 +6,7 @@ import { createClient } from "next-sanity";
 
 import useMousePosition from "../hooks/useMousePosition";
 
-const Carousel = ({ projects, theme }) => {
+const CarouselTwo = ({ projects, theme }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [length, setLength] = useState();
   const thumbnailRef = useRef({});
@@ -64,7 +64,7 @@ const Carousel = ({ projects, theme }) => {
   };
 
   // Styles for previous and next hover areas
-  const leftRightStyles = { divClass: "w-1/3 lg:w-full h-full z-20 lg:z-0" };
+  const leftRightStyles = { divClass: "w-1/3 h-full z-20" };
   let currentThumbnail = thumbnailRef.current[currentIndex];
   let nextThumbnail = thumbnailRef.current[currentIndex + 1];
   let firstThumbnail = thumbnailRef.current[0];
@@ -94,15 +94,15 @@ const Carousel = ({ projects, theme }) => {
   ]);
 
   return (
-    <div className="flex justify-center h-[600px] sm:h-[800px] items-center">
-      <div className="w-full lg:w-2/3 relative">
+    <div className="flex justify-center items-center p-md relative border border-secondary bg-primary">
+      <div className="w-full relative">
         {projects.map(({ thumbnail, slug }, i) => {
           return (
             <div key={i} className="group/item relative min-w-full z-10">
               {i === 0 && (
                 <div
                   ref={newWorkRef}
-                  className="font-serif text-xl text-secondary border border-secondary p-md bg-primary absolute animate-bounce lg:left-[-50px] top-[-20px]"
+                  className="font-serif text-xl text-secondary border border-secondary p-md bg-primary absolute animate-bounce top-[-20px]"
                 >
                   New work
                 </div>
@@ -140,7 +140,7 @@ const Carousel = ({ projects, theme }) => {
           );
         })}
       </div>
-      <div className="absolute  w-full h-full flex ">
+      <div className="absolute w-full h-full flex">
         <div
           className={`${leftRightStyles.divClass} ${
             theme === 2
@@ -152,7 +152,7 @@ const Carousel = ({ projects, theme }) => {
             setRunInterval(false);
           }}
         ></div>
-        <div className=" h-[0px] w-1/3 lg:min-w-[800px]"></div>
+        <div className=" h-[0px] w-1/3"></div>
         <div
           className={`${leftRightStyles.divClass} ${
             theme === 2
@@ -194,4 +194,4 @@ function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
 
-export default Carousel;
+export default CarouselTwo;

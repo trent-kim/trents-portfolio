@@ -1,26 +1,26 @@
 import React from "react";
 import Link from "next/link";
 
-const Nav = ({ theme, setTheme }) => {
+const Nav = ({ about, theme, setTheme }) => {
   return (
     <nav className="flex fixed justify-center w-full  z-30 mt-md px-md">
       <div className="p-md flex justify-between w-[1276px] border border-secondary bg-primary">
         {/* Home Button */}
         <Link
           href="/"
-          className="group font-serif text-4xl text-secondary  m-[0]"
+          className="group font-serif text-xl text-secondary  m-[0]"
         >
           Tr
           <span className="absolute group-hover:rotate-[-15deg] transition-transform origin-bottom duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
             e
           </span>
           <span className="text-primary">e</span>n
-          <span className="absolute group-hover:rotate-[-13deg] transition-transform origin-bottom duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
+          <span className="absolute group-hover:rotate-[-11deg] transition-transform origin-bottom duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
             t
           </span>
           <span className="text-primary">t</span> K
           <span className="inline-block">
-            <span className="absolute top-[-9px] block group-hover:translate-y-[4.4px] transition-transform duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
+            <span className="absolute top-[1px] block group-hover:translate-y-[2.2px] transition-transform duration-500 ease-[cubic-bezier(.55,1.9,.32,.56)]">
               .
             </span>
             <span className="block">ı</span>
@@ -31,9 +31,13 @@ const Nav = ({ theme, setTheme }) => {
         {/* Left Side */}
         <div className="flex items-center gap-md">
           {/* About Button */}
-          <Link href="/about">
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href={about[0].contacts[0].url}
+          >
             <button className="font-sans text-sm text-secondary border border-secondary rounded-full h-[30px] px-md hover:bg-secondary hover:text-primary">
-              About
+              Get in touch
             </button>
           </Link>
           {/* / About Button */}
