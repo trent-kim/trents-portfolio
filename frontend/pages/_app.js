@@ -27,18 +27,27 @@ const App = ({ Component, pageProps }) => {
   useEffect(() => {
     const handleRouteChange = (url) => {
       setLoading(true)
+      
     }
 
-    const handleRouteChangeComplete = () => {
+    const handleRouteChangeComplete = (url) => {
       setLoading(false)
+      console.log("End:", loading)
+    }
+
+    const handleRouteChangeError = (url) => {
+      setLoading(false)
+      console.log("Error:", loading)
     }
 
     router.events.on('routeChangeStart', handleRouteChange)
     router.events.on('routeChangeComplete', handleRouteChangeComplete)
+    router.events.on('routeChangeError', handleRouteChangeError)
 
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
       router.events.off('routeChangeComplete', handleRouteChangeComplete)
+      router.events.off('routeChangeError', handleRouteChangeError)
     }
   }, [router.events])
 
@@ -70,8 +79,10 @@ const App = ({ Component, pageProps }) => {
         `}
       </style>
       <>
-        {loading ? 
-          <Loader/> 
+        {loading ? (
+          <Loader/> ,
+          console.log("Start:", loading)
+        )
           : 
           <Component theme={theme} setTheme={setTheme} {...pageProps} />
         }
