@@ -79,13 +79,12 @@ const App = ({ Component, pageProps }) => {
         `}
       </style>
       <>
-        {loading ? (
+        {loading && (
           <Loader/> ,
           console.log("Start:", loading)
-        )
-          : 
+        )}
+           
           <Component theme={theme} setTheme={setTheme} {...pageProps} />
-        }
       </>
     </>
   );
