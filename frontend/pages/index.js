@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, Suspense } from "react";
 import groq from "groq";
 import { createClient } from "next-sanity";
+import dynamic from 'next/dynamic'
 
-import Layout from "../components/layout";
+// import Layout from "../components/layout";
 import Filter from "../components/Filter";
 import ProjectCards from "../components/ProjectCards";
 import Carousel from "../components/Carousel";
@@ -10,14 +11,21 @@ import CarouselTwo from "../components/Carousel2";
 import Footer from "../components/Footer";
 import Nav from "../components/Nav";
 import About from "../components/About";
+import Loading from "../components/Loading"
+
+
+const Layout = dynamic(() => import('../components/layout'), {
+    ssr: false,
+})
 
 const Home = ({ projects, categories, about, theme, setTheme }) => {
   // Track the current category to filter by.
   const [categoryName, setCategoryName] = useState(null);
 
   return (
+    <Suspense fallback={<Loading />}>
     <Layout theme={theme} setTheme={setTheme}>
-      {/* <Suspense fallback={<Loading />}> */}
+      
       <Nav about={about} theme={theme} setTheme={setTheme}></Nav>
       <div className="w-[1300px] px-md pb-md mt-[77px]">
         <About 
@@ -39,8 +47,9 @@ const Home = ({ projects, categories, about, theme, setTheme }) => {
         ></ProjectCards>
         <Footer about={about}></Footer>
       </div>
-      {/* </Suspense> */}
+      
     </Layout>
+    </Suspense>
   );
 };
 

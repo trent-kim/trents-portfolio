@@ -60,8 +60,6 @@ const App = ({ Component, pageProps }) => {
     }
   }, [theme]);
 
-  if (loading) return <Loading/>
-
   return (
     <>
       <Seo></Seo>
@@ -80,8 +78,13 @@ const App = ({ Component, pageProps }) => {
           }
         `}
       </style>
-      
+      <>
+        {loading ?
+          <Loading/> 
+          : 
           <Component theme={theme} setTheme={setTheme} {...pageProps} />
+        }
+      </>
     </>
   );
 };
