@@ -1,6 +1,6 @@
 import React from "react";
 
-const Loading = ({}) => {
+const Loading = () => {
   return (
     <div className="w-full h-full absolute flex items-center justify-center bg-background">
     <div

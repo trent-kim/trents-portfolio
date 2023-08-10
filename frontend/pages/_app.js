@@ -31,7 +31,7 @@ const App = ({ Component, pageProps }) => {
     }
 
     const handleRouteChangeComplete = (url) => {
-      setLoading(false)
+      setTimeout(() => {setLoading(false)} , 5000)
       console.log("End:", loading)
     }
 
@@ -42,12 +42,12 @@ const App = ({ Component, pageProps }) => {
 
     router.events.on('routeChangeStart', handleRouteChange)
     router.events.on('routeChangeComplete', handleRouteChangeComplete)
-    router.events.on('routeChangeError', handleRouteChangeError)
+    router.events.on('routeChangeError', handleRouteChangeComplete)
 
     return () => {
       router.events.off('routeChangeStart', handleRouteChange)
       router.events.off('routeChangeComplete', handleRouteChangeComplete)
-      router.events.off('routeChangeError', handleRouteChangeError)
+      router.events.off('routeChangeError', handleRouteChangeComplete)
     }
   }, [router.events])
 
