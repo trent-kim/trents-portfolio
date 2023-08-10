@@ -4,7 +4,7 @@ import { Piazzolla, IBM_Plex_Sans } from "next/font/google";
 import { useRouter } from 'next/router'
 
 import Seo from "../components/Seo";
-import Loader from '../components/Loader';
+import Loading from '../components/Loading';
 
 // Typefaces
 const piazzolla = Piazzolla({
@@ -27,7 +27,7 @@ const App = ({ Component, pageProps }) => {
   useEffect(() => {
     const handleRouteChange = (url) => {
       setLoading(true)
-      
+      console.log("Url:", url)
     }
 
     const handleRouteChangeComplete = (url) => {
@@ -60,6 +60,8 @@ const App = ({ Component, pageProps }) => {
     }
   }, [theme]);
 
+  if (loading) return <Loading/>
+
   return (
     <>
       <Seo></Seo>
@@ -78,14 +80,8 @@ const App = ({ Component, pageProps }) => {
           }
         `}
       </style>
-      <>
-        {loading && (
-          <Loader/> ,
-          console.log("Start:", loading)
-        )}
-           
+      
           <Component theme={theme} setTheme={setTheme} {...pageProps} />
-      </>
     </>
   );
 };

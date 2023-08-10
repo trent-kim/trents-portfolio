@@ -2,7 +2,7 @@ import React, { useState, useRef } from "react";
 import Link from "next/link";
 import { PortableText } from "@portabletext/react";
 
-const NavTwo = ({ about }) => {
+const About = ({ about }) => {
   const aboutRef = useRef(null);
   const [toggle, setToggle] = useState(false);
 
@@ -157,4 +157,4 @@ const ptComponents = {
   },
 };
 
-export default NavTwo;
+export default About;

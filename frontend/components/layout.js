@@ -1,6 +1,8 @@
 import React from "react";
 
+
 import Nav from "./Nav";
+
 
 export default function Layout({ children, theme, setTheme }) {
   // Styles for main children
@@ -19,7 +21,7 @@ export default function Layout({ children, theme, setTheme }) {
       }`}
     >
       
-      {children}
+        {children}
     </main>
   );
 }

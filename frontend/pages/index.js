@@ -17,6 +17,7 @@ const Home = ({ projects, categories, about, theme, setTheme }) => {
 
   return (
     <Layout theme={theme} setTheme={setTheme}>
+      {/* <Suspense fallback={<Loading />}> */}
       <Nav about={about} theme={theme} setTheme={setTheme}></Nav>
       <div className="w-[1300px] px-md pb-md mt-[77px]">
         <About 
@@ -38,6 +39,7 @@ const Home = ({ projects, categories, about, theme, setTheme }) => {
         ></ProjectCards>
         <Footer about={about}></Footer>
       </div>
+      {/* </Suspense> */}
     </Layout>
   );
 };
