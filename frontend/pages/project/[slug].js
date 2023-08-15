@@ -58,7 +58,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
               <div className="group p-md border border-secondary flex flex-col bg-primary gap-lg">
                 {/* Home Button */}
                 <Link
-                  href={`/`}
+                  href={`/#projects`}
                   className="hover:bg-primary bg-secondary w-[30px] h-[30px] border border-secondary rounded-full"
                 ></Link>
                 {/* / Home Button */}
@@ -158,6 +158,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                 </div>
                 {/* / Details */}
                 {/* Links */}
+                <div className="flex gap-md">
                 {project?.links &&
                   project?.links?.map((link, i) => (
                     <div key={link.url}>
@@ -172,6 +173,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                       </Link>
                     </div>
                   ))}
+                  </div>
                 {/* / Links */}
               </div>
             </div>

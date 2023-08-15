@@ -30,7 +30,7 @@ const Filter = ({ categories, setCategoryName }) => {
   };
 
   return (
-    <div className="p-md mb-lg flex bg-primary w-full border border-secondary">
+    <div id="projects" className="p-md mb-lg flex bg-primary w-full border border-secondary">
       <div className="flex flex-wrap">
         {categories &&
           categories.map(({ _id, name }, i) => (

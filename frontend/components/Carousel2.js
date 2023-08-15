@@ -31,12 +31,12 @@ const CarouselTwo = ({ projects, theme }) => {
   const prev = () => {
     // clearInterval();
     if (currentIndex > 0) {
-      thumbnailRef.current[currentIndex].style.display = "none";
-      thumbnailRef.current[currentIndex - 1].style.display = "block";
+      thumbnailRef.current[currentIndex].style.visibility = "hidden";
+      thumbnailRef.current[currentIndex - 1].style.visibility = "visible";
       setCurrentIndex(currentIndex - 1);
     } else {
-      thumbnailRef.current[currentIndex].style.display = "none";
-      thumbnailRef.current[length - 1].style.display = "block";
+      thumbnailRef.current[currentIndex].style.visibility = "hidden";
+      thumbnailRef.current[length - 1].style.visibility = "visible";
       setCurrentIndex(length - 1);
     }
   };
@@ -44,12 +44,12 @@ const CarouselTwo = ({ projects, theme }) => {
   const next = () => {
     // clearInterval();
     if (currentIndex < length - 1) {
-      thumbnailRef.current[currentIndex].style.display = "none";
-      thumbnailRef.current[currentIndex + 1].style.display = "block";
+      thumbnailRef.current[currentIndex].style.visibility = "hidden";
+      thumbnailRef.current[currentIndex + 1].style.visibility = "visible";
       setCurrentIndex(currentIndex + 1);
     } else {
-      thumbnailRef.current[currentIndex].style.display = "none";
-      thumbnailRef.current[0].style.display = "block";
+      thumbnailRef.current[currentIndex].style.visibility = "hidden";
+      thumbnailRef.current[0].style.visibility = "visible";
       setCurrentIndex(0);
     }
   };
@@ -73,11 +73,11 @@ const CarouselTwo = ({ projects, theme }) => {
     if (runInterval) {
       const interval = setInterval(() => {
         currentIndex < length - 1
-          ? ((currentThumbnail.style.display = "none"),
-            (nextThumbnail.style.display = "block"),
+          ? ((currentThumbnail.style.visibility = "hidden"),
+            (nextThumbnail.style.visibility = "visible"),
             setCurrentIndex(currentIndex + 1))
-          : ((currentThumbnail.style.display = "none"),
-            (firstThumbnail.style.display = "block"),
+          : ((currentThumbnail.style.visibility = "hidden"),
+            (firstThumbnail.style.visibility = "visible"),
             setCurrentIndex(0));
       }, 5000);
       return () => clearInterval(interval);
@@ -94,15 +94,15 @@ const CarouselTwo = ({ projects, theme }) => {
   ]);
 
   return (
-    <div className="flex justify-center items-center p-md relative border border-secondary bg-primary">
+    <div className="flex justify-center items-center p-md border border-secondary bg-primary">
       <div className="w-full relative">
         {projects.map(({ thumbnail, slug }, i) => {
           return (
-            <div key={i} className="group/item relative min-w-full z-10">
+            <div key={i} className="group/item first:relative absolute min-w-full first:visible invisible z-10 top-[0px]">
               {i === 0 && (
                 <div
                   ref={newWorkRef}
-                  className="font-serif text-xl text-secondary border border-secondary p-md bg-primary absolute animate-bounce top-[-20px]"
+                  className="font-serif text-xl text-secondary border border-secondary p-md bg-primary absolute animate-bounce top-[-15px]"
                 >
                   New work
                 </div>
@@ -132,15 +132,15 @@ const CarouselTwo = ({ projects, theme }) => {
                     maxWidth: "100%",
                     height: "auto",
                   }}
-                  className="group-first/item:block hidden w-full"
+                  className=" w-full"
                   alt=""
                 />
               </Link>
             </div>
           );
         })}
-      </div>
-      <div className="absolute w-full h-full flex">
+      
+      <div className="absolute w-full h-full flex top-[0px]">
         <div
           className={`${leftRightStyles.divClass} ${
             theme === 2
@@ -176,6 +176,7 @@ const CarouselTwo = ({ projects, theme }) => {
         <div className="font-sans text-sm text-secondary">
           {projects[currentIndex].title}
         </div>
+      </div>
       </div>
     </div>
   );

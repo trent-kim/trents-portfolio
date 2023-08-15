@@ -31,7 +31,7 @@ const App = ({ Component, pageProps }) => {
     }
 
     const handleRouteChangeComplete = (url) => {
-      setTimeout(() => {setLoading(false)} , 5000)
+      setTimeout(() => {setLoading(false)} , 1000)
       console.log("End:", loading)
     }
 
@@ -79,11 +79,11 @@ const App = ({ Component, pageProps }) => {
         `}
       </style>
       <>
-        {loading ?
+        {/* {loading ?
           <Loading/> 
-          : 
+          :  */}
           <Component theme={theme} setTheme={setTheme} {...pageProps} />
-        }
+        {/* } */}
       </>
     </>
   );
