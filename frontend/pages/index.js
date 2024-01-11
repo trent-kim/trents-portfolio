@@ -68,7 +68,10 @@ const projectQuery = groq`*[_type == 'project']{
   year,
   "categories": categories[]->name,
   introduction,
-  thumbnail
+  thumbnail{
+    image,
+    "video": video.asset->playbackId
+  }
 } | order(_updatedAt asc) | order(year desc)`;
 
 const categoryQuery = groq`*[_type == 'category']{

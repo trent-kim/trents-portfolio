@@ -2,6 +2,7 @@ import React, { useState, useRef } from "react";
 import groq from "groq";
 import Image from "next/image";
 import Link from "next/link";
+import MuxPlayer from "@mux/mux-player-react"; 
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import { createClient } from "next-sanity";
@@ -40,13 +41,14 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
   const imageDesRef = useRef(null);
   const imageMouseEnter = (i) => {
     setCurrentIndex(i);
-    project?.images[i]?.description &&
+    project?.mediaList[i]?.description &&
       (imageDesRef.current.style.display = "flex");
   };
   const imageMouseLeave = () => {
     imageDesRef.current.style.display = "none";
   };
 
+  console.log("Media List:", project?.mediaList)
   return (
     <Layout theme={theme} setTheme={setTheme}>
       {about && <Nav about={about} theme={theme} setTheme={setTheme}></Nav>}
@@ -181,24 +183,45 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
           {/* /Project Card */}
           {/* Images */}
           <div className="border border-secondary bg-primary p-md mb-lg flex flex-col gap-y-lg w-full lg:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)] my-lg">
-            {project?.images?.map((image, i) => (
-              <Image
-                key={i}
-                src={urlFor(image).url()}
-                alt=""
-                width={1000}
-                height={1000}
-                style={{
-                  maxWidth: "100%",
-                  height: "auto",
-                }}
-                onMouseEnter={() => {
-                  imageMouseEnter(i);
-                }}
-                onMouseLeave={() => {
-                  imageMouseLeave();
-                }}
-              />
+            {project?.mediaList?.map(({}, i) => (
+              project?.mediaList[i]?.image ? (
+                <Image
+                  key={i}
+                  src={urlFor(project?.mediaList[i]?.image).url()}
+                  alt=""
+                  width={1000}
+                  height={1000}
+                  style={{
+                    maxWidth: "100%",
+                    height: "auto",
+                  }}
+                  onMouseEnter={() => {
+                    imageMouseEnter(i);
+                  }}
+                  onMouseLeave={() => {
+                    imageMouseLeave();
+                  }}
+                />
+                ) : (
+                  <div
+                    className="mb-[-6px]"
+                    onMouseEnter={() => {
+                      imageMouseEnter(i);
+                    }}
+                    onMouseLeave={() => {
+                      imageMouseLeave();
+                    }}
+                  >
+                  <MuxPlayer
+                    className="w-full"
+                    loop
+                    autoPlay="muted"
+                    preload="none"
+                    streamType="on-demand"
+                    playbackId={project?.mediaList[i]?.video}
+                  />
+                  </div>
+                )
             ))}
             {/* Image Descriptions */}
             <div
@@ -207,8 +230,8 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
               className="fixed hidden p-md border border-secondary mr-md z-20 bg-primary flex-col gap-md max-w-[calc((1/2*100%)-6px)] xl:max-w-[calc((1/3*100%)-8px)]"
             >
               <div className="font-sans text-sm text-secondary">
-                {project?.images[currentIndex]?.description &&
-                  project?.images[currentIndex]?.description}
+                {project?.mediaList[currentIndex]?.description &&
+                  project?.mediaList[currentIndex]?.description}
               </div>
             </div>
             {/* / Image Descriptions */}
@@ -244,7 +267,11 @@ const projectQuery = groq`*[_type == "project" && slug.current == $slug][0]{
     introduction,
     description,
     links[],
-    images
+    mediaList[]{
+      image,
+      "video": video.asset->playbackId,
+      description
+    }
   }`;
 
 const projectsQuery = groq`*[_type == 'project']{
@@ -254,7 +281,7 @@ const projectsQuery = groq`*[_type == 'project']{
   year,
   "categories": categories[]->name,
   introduction,
-  thumbnail
+  "thumbnail": thumbnail.asset->playbackId
 } | order(_updatedAt asc) | order(year desc)`;
 
 const aboutQuery = groq`*[_type == 'about']{

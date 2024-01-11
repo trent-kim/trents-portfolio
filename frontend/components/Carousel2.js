@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import MuxPlayer from "@mux/mux-player-react"; 
 import imageUrlBuilder from "@sanity/image-url";
 import { createClient } from "next-sanity";
 
@@ -96,13 +97,13 @@ const CarouselTwo = ({ projects, theme }) => {
   return (
     <div className="flex justify-center items-center p-md border border-secondary bg-primary">
       <div className="w-full relative">
-        {projects.map(({ thumbnail, slug }, i) => {
+        {projects.map(({ title, thumbnail, slug }, i) => {
           return (
-            <div key={i} className="group/item first:relative absolute min-w-full first:visible invisible z-10 top-[0px]">
+            <div key={i} className="group/item first:relative absolute min-w-full first:visible invisible z-10 top-[0px] mb-[-6px]">
               {i === 0 && (
                 <div
                   ref={newWorkRef}
-                  className="font-serif text-xl text-secondary border border-secondary p-md bg-primary absolute animate-bounce top-[-15px]"
+                  className="font-serif text-xl text-secondary border border-secondary p-md bg-primary absolute animate-bounce top-[-15px] z-10"
                 >
                   New work
                 </div>
@@ -122,19 +123,31 @@ const CarouselTwo = ({ projects, theme }) => {
                   thumbnailMouseLeave();
                 }}
               >
-                <Image
-                  eager='true'
+                {thumbnail.image ? (
+                 <Image
                   ref={(element) => (thumbnailRef.current[i] = element)}
-                  src={urlFor(thumbnail).url()}
+                  src={urlFor(thumbnail.image).url()}
                   width={1000}
                   height={1000}
                   style={{
                     maxWidth: "100%",
                     height: "auto",
                   }}
-                  className=" w-full"
+                  
                   alt=""
                 />
+                ) : (
+                <MuxPlayer
+                  ref={(element) => (thumbnailRef.current[i] = element)}
+                  className="w-full"
+                  loop
+                  autoPlay="muted"
+                  preload="none"
+                  streamType="on-demand"
+                  playbackId={thumbnail.video}
+                  metadata={{ video_title: title }}
+                />
+                )}
               </Link>
             </div>
           );

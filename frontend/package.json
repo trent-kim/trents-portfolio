@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@mux/mux-player-react": "^2.3.0",
     "@portabletext/react": "^2.0.2",
     "@sanity/client": "^5.4.1",
     "@sanity/image-url": "^1.0.2",

@@ -83,7 +83,7 @@ const Footer = ({ about }) => {
           {/* Copyright */}
           <div className="w-full md:w-[calc((1/3*100%)-16px)]">
             <div className="font-serif text-xl text-secondary">
-              Copyright &#169; 2023
+              Copyright &#169; 2024
             </div>
             <div className="font-sans text-sm text-secondary">
               Trent Kim

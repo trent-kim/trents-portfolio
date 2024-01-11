@@ -104,29 +104,49 @@ export default defineType({
     defineField({
       name: 'thumbnail',
       title: 'Thumbnail',
-      type: 'image',
-      options: {
-        hotspot: true,
-      },
-    }),
-    defineField({
-      name: 'images',
-      title: 'Images',
-      type: 'array',
-      of: [
+      type: 'object',
+      fields: [
         {
           name: 'image',
           title: 'Image',
           type: 'image',
           options: {
-            hotspot: true,
+            hotspot: true, // If you want to enable hotspot for images
           },
+        },
+        {
+          name: 'video',
+          title: 'Video',
+          type: 'mux.video',
+        },
+      ],
+    }),
+    defineField({
+      name: 'mediaList',
+      title: 'Media List',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
           fields: [
+            {
+              name: 'image',
+              title: 'Image',
+              type: 'image',
+              options: {
+                hotspot: true, // If you want to enable hotspot for images
+              },
+            },
+            {
+              name: 'video',
+              title: 'Video',
+              type: 'mux.video',
+            },
             {
               name: 'description',
               title: 'Description',
               type: 'string',
-            }
+            },
           ],
         },
       ],
