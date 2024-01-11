@@ -204,6 +204,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                 />
                 ) : (
                   <div
+                    key={i}
                     className="mb-[-6px]"
                     onMouseEnter={() => {
                       imageMouseEnter(i);
