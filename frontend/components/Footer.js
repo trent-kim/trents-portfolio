@@ -69,14 +69,6 @@ const Footer = ({ about }) => {
                   <br></br>
                 </Link>
               ))}
-              {/* <Link
-                target="_blank"
-                rel="noreferrer"
-                href={"http://trentkim.space/trent-kim-cv.pdf"}
-                className="hover:text-primary"
-              >
-                Resume
-              </Link> */}
             </div>
           </div>
           {/* / Contact */}
