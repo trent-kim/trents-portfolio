@@ -99,7 +99,7 @@ const CarouselTwo = ({ projects, theme }) => {
       <div className="w-full relative">
         {projects.map(({ title, thumbnail, slug }, i) => {
           return (
-            <div key={i} className="group/item first:relative absolute min-w-full first:visible invisible z-10 top-[0px] mb-[-6px]">
+            <div key={i} className="group/item first:relative absolute min-w-full first:visible invisible z-10 top-[0px]">
               {i === 0 && (
                 <div
                   ref={newWorkRef}
@@ -114,7 +114,7 @@ const CarouselTwo = ({ projects, theme }) => {
                   theme === 2
                     ? "hover:cursor-upArrowDark"
                     : "hover:cursor-upArrow"
-                }`}
+                } flex justify-center aspect-video`}
                 href={`/project/${encodeURIComponent(slug.current)}`}
                 onMouseEnter={() => {
                   thumbnailMouseEnter();
@@ -130,16 +130,16 @@ const CarouselTwo = ({ projects, theme }) => {
                   width={1000}
                   height={1000}
                   style={{
-                    maxWidth: "100%",
-                    height: "auto",
+                    maxWidth: "",
+                    height: "",
                   }}
-                  
+                  className="object-contain "
                   alt=""
                 />
                 ) : (
                 <MuxPlayer
                   ref={(element) => (thumbnailRef.current[i] = element)}
-                  className="w-full"
+                  className="h-full"
                   loop
                   autoPlay="muted"
                   preload="none"

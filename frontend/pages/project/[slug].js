@@ -81,12 +81,14 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                   </div>
                   {/* / Introduction */}
                   {/* Description */}
+                  {project?.collaborators && (
                   <div className="font-sans text-sm text-secondary">
                     <PortableText
                       value={project?.description}
                       components={ptComponents}
                     />
                   </div>
+                  )}
                   {/* /Description */}
                 </div>
                 {/* Details */}
@@ -159,10 +161,10 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                   {/* / Collaborators */}
                 </div>
                 {/* / Details */}
-                {/* Links */}
-                <div className="flex gap-md">
-                {project?.links &&
-                  project?.links?.map((link, i) => (
+                {/* Links */} 
+                {project?.links && (
+                  <div className="flex gap-md">
+                  {project?.links?.map((link, i) => (
                     <div key={link.url}>
                       <Link
                         target="_blank"
@@ -176,6 +178,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                     </div>
                   ))}
                   </div>
+                  )}
                 {/* / Links */}
               </div>
             </div>
