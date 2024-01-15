@@ -114,7 +114,7 @@ const CarouselTwo = ({ projects, theme }) => {
                   theme === 2
                     ? "hover:cursor-upArrowDark"
                     : "hover:cursor-upArrow"
-                } flex justify-center aspect-video`}
+                } flex justify-center aspect-[14/8]`}
                 href={`/project/${encodeURIComponent(slug.current)}`}
                 onMouseEnter={() => {
                   thumbnailMouseEnter();
@@ -133,7 +133,7 @@ const CarouselTwo = ({ projects, theme }) => {
                     maxWidth: "",
                     height: "",
                   }}
-                  className="object-contain "
+                  className="object-contain"
                   alt=""
                 />
                 ) : (
