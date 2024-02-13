@@ -17,6 +17,13 @@ function urlFor(source) {
   return imageUrlBuilder(client).image(source);
 }
 
+// Function to generate LQIP URL
+function generateLQIPUrl(image) {
+  return urlFor(image)
+    .width(20) // Set a low width for LQIP
+    .url();
+}
+
 const ptComponents = {
   types: {
     image: ({ value }) => {
@@ -37,6 +44,8 @@ const ptComponents = {
 const Project = ({ project, projects, about, theme, setTheme }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const { x, y } = useMousePosition();
+
+  const [isLoading, setIsLoading] = useState(true);
 
   const imageDesRef = useRef(null);
   const imageMouseEnter = (i) => {
@@ -81,7 +90,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                   </div>
                   {/* / Introduction */}
                   {/* Description */}
-                  {project?.collaborators && (
+                  {project?.description && (
                   <div className="font-sans text-sm text-secondary">
                     <PortableText
                       value={project?.description}
@@ -188,10 +197,24 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
           <div className="border border-secondary bg-primary p-md mb-lg flex flex-col gap-y-lg w-full lg:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)] my-lg">
             {project?.mediaList?.map(({}, i) => (
               project?.mediaList[i]?.image ? (
+                <div key={i}>
+                {isLoading && (
+                  <Image
+                    src={generateLQIPUrl(project?.mediaList[i]?.image)}
+                    alt=""
+                    width={1000}
+                    height={1000}
+                    style={{
+                      maxWidth: "100%",
+                      height: "auto",
+                    }}
+                    quality={1} // This is for the LQIP
+                  />
+                )}
                 <Image
-                  key={i}
                   src={urlFor(project?.mediaList[i]?.image).url()}
                   alt=""
+                  onLoad={() => setIsLoading(false)}
                   width={1000}
                   height={1000}
                   style={{
@@ -205,6 +228,7 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                     imageMouseLeave();
                   }}
                 />
+                </div>
                 ) : (
                   <div
                     key={i}

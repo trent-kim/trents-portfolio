@@ -14,6 +14,8 @@ const CarouselTwo = ({ projects, theme }) => {
   const newWorkRef = useRef(null);
   const { x, y } = useMousePosition();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const [runInterval, setRunInterval] = useState(true);
 
   // If its the first thumbnail, show 'New work' label
@@ -124,9 +126,25 @@ const CarouselTwo = ({ projects, theme }) => {
                 }}
               >
                 {thumbnail.image ? (
+                  <>
+                  {isLoading && (
+                    <Image
+                      src={generateLQIPUrl(thumbnail.image)}
+                      alt=""
+                      width={1000}
+                      height={1000}
+                      style={{
+                        maxWidth: "",
+                        height: "",
+                      }}
+                      className="object-contain"
+                      quality={1} // This is for the LQIP
+                    />
+                  )}
                  <Image
                   ref={(element) => (thumbnailRef.current[i] = element)}
                   src={urlFor(thumbnail.image).url()}
+                  onLoad={() => setIsLoading(false)}
                   width={1000}
                   height={1000}
                   style={{
@@ -136,6 +154,7 @@ const CarouselTwo = ({ projects, theme }) => {
                   className="object-contain"
                   alt=""
                 />
+                </>
                 ) : (
                 <MuxPlayer
                   ref={(element) => (thumbnailRef.current[i] = element)}
@@ -206,6 +225,13 @@ const client = createClient({
 // image url builder
 function urlFor(source) {
   return imageUrlBuilder(client).image(source);
+}
+
+// Function to generate LQIP URL
+function generateLQIPUrl(image) {
+  return urlFor(image)
+    .width(20) // Set a low width for LQIP
+    .url();
 }
 
 export default CarouselTwo;
