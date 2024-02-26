@@ -2,13 +2,13 @@ import React, { useState, useRef } from "react";
 import groq from "groq";
 import Image from "next/image";
 import Link from "next/link";
-import MuxPlayer from "@mux/mux-player-react"; 
+import MuxPlayer from "@mux/mux-player-react";
 import imageUrlBuilder from "@sanity/image-url";
 import { PortableText } from "@portabletext/react";
 import { createClient } from "next-sanity";
 
 import Layout from "../../components/layout";
-import Nav from "../../components/Nav"
+import Nav from "../../components/Nav";
 import MoreWork from "../../components/MoreWork";
 import Footer from "../../components/Footer";
 import useMousePosition from "../../hooks/useMousePosition";
@@ -57,7 +57,6 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
     imageDesRef.current.style.display = "none";
   };
 
-  console.log("Media List:", project?.mediaList)
   return (
     <Layout theme={theme} setTheme={setTheme}>
       {about && <Nav about={about} theme={theme} setTheme={setTheme}></Nav>}
@@ -91,12 +90,12 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                   {/* / Introduction */}
                   {/* Description */}
                   {project?.description && (
-                  <div className="font-sans text-sm text-secondary">
-                    <PortableText
-                      value={project?.description}
-                      components={ptComponents}
-                    />
-                  </div>
+                    <div className="font-sans text-sm text-secondary">
+                      <PortableText
+                        value={project?.description}
+                        components={ptComponents}
+                      />
+                    </div>
                   )}
                   {/* /Description */}
                 </div>
@@ -170,24 +169,24 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                   {/* / Collaborators */}
                 </div>
                 {/* / Details */}
-                {/* Links */} 
+                {/* Links */}
                 {project?.links && (
                   <div className="flex gap-md">
-                  {project?.links?.map((link, i) => (
-                    <div key={link.url}>
-                      <Link
-                        target="_blank"
-                        rel="noreferrer"
-                        href={`${link.url}`}
-                      >
-                        <button className="font-sans text-sm text-secondary border border-secondary rounded-full h-[30px] px-md hover:bg-secondary hover:text-primary z-30">
-                          {link.label}
-                        </button>
-                      </Link>
-                    </div>
-                  ))}
+                    {project?.links?.map((link, i) => (
+                      <div key={link.url}>
+                        <Link
+                          target="_blank"
+                          rel="noreferrer"
+                          href={`${link.url}`}
+                        >
+                          <button className="font-sans text-sm text-secondary border border-secondary rounded-full h-[30px] px-md hover:bg-secondary hover:text-primary z-30">
+                            {link.label}
+                          </button>
+                        </Link>
+                      </div>
+                    ))}
                   </div>
-                  )}
+                )}
                 {/* / Links */}
               </div>
             </div>
@@ -195,51 +194,52 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
           {/* /Project Card */}
           {/* Images */}
           <div className="border border-secondary bg-primary p-md mb-lg flex flex-col gap-y-lg w-full lg:w-[calc((1/2*100%)-6px)] xl:w-[calc((2/3*100%)-4px)] my-lg">
-            {project?.mediaList?.map(({}, i) => (
+            {project?.mediaList?.map(({}, i) =>
               project?.mediaList[i]?.image ? (
                 <div key={i}>
-                {isLoading && (
-                  <Image
-                    src={generateLQIPUrl(project?.mediaList[i]?.image)}
-                    alt=""
-                    width={1000}
-                    height={1000}
-                    style={{
-                      maxWidth: "100%",
-                      height: "auto",
-                    }}
-                    quality={1} // This is for the LQIP
-                  />
-                )}
-                <Image
-                  src={urlFor(project?.mediaList[i]?.image).url()}
-                  alt=""
-                  onLoad={() => setIsLoading(false)}
-                  width={1000}
-                  height={1000}
-                  style={{
-                    maxWidth: "100%",
-                    height: "auto",
-                  }}
+                  {isLoading && (
+                    <Image
+                      src={generateLQIPUrl(project?.mediaList[i]?.image)}
+                      alt=""
+                      width={1000}
+                      height={1000}
+                      style={{
+                        maxWidth: "100%",
+                        height: "auto",
+                      }}
+                      quality={1} // This is for the LQIP
+                    />
+                  )}
+                    <Image
+                      src={urlFor(project?.mediaList[i]?.image).url()}
+                      alt=""
+                      onLoad={() => setIsLoading(false)}
+                      width={1000}
+                      height={1000}
+                      style={{
+                        visibility: isLoading ? "hidden" : "visible",
+                        maxWidth: "100%",
+                        height: "auto",
+                      }}
+                      onMouseEnter={() => {
+                        imageMouseEnter(i);
+                      }}
+                      onMouseLeave={() => {
+                        imageMouseLeave();
+                      }}
+                    />
+                </div>
+              ) : (
+                <div
+                  key={i}
+                  className="mb-[-6px]"
                   onMouseEnter={() => {
                     imageMouseEnter(i);
                   }}
                   onMouseLeave={() => {
                     imageMouseLeave();
                   }}
-                />
-                </div>
-                ) : (
-                  <div
-                    key={i}
-                    className="mb-[-6px]"
-                    onMouseEnter={() => {
-                      imageMouseEnter(i);
-                    }}
-                    onMouseLeave={() => {
-                      imageMouseLeave();
-                    }}
-                  >
+                >
                   <MuxPlayer
                     className="w-full"
                     loop
@@ -248,9 +248,9 @@ const Project = ({ project, projects, about, theme, setTheme }) => {
                     streamType="on-demand"
                     playbackId={project?.mediaList[i]?.video}
                   />
-                  </div>
-                )
-            ))}
+                </div>
+              )
+            )}
             {/* Image Descriptions */}
             <div
               ref={imageDesRef}

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import MuxPlayer from "@mux/mux-player-react"; 
+import MuxPlayer from "@mux/mux-player-react";
 import imageUrlBuilder from "@sanity/image-url";
 import { createClient } from "next-sanity";
 
@@ -14,8 +14,10 @@ const CarouselTwo = ({ projects, theme }) => {
   const newWorkRef = useRef(null);
   const { x, y } = useMousePosition();
 
+  // Is image loading
   const [isLoading, setIsLoading] = useState(true);
 
+  // Run interval if next and previous have not been clicked
   const [runInterval, setRunInterval] = useState(true);
 
   // If its the first thumbnail, show 'New work' label
@@ -32,7 +34,6 @@ const CarouselTwo = ({ projects, theme }) => {
 
   // Show previous and next thumbnail on click and hide the current; set the 'currentIndex' of the thumbnails
   const prev = () => {
-    // clearInterval();
     if (currentIndex > 0) {
       thumbnailRef.current[currentIndex].style.visibility = "hidden";
       thumbnailRef.current[currentIndex - 1].style.visibility = "visible";
@@ -45,7 +46,6 @@ const CarouselTwo = ({ projects, theme }) => {
   };
 
   const next = () => {
-    // clearInterval();
     if (currentIndex < length - 1) {
       thumbnailRef.current[currentIndex].style.visibility = "hidden";
       thumbnailRef.current[currentIndex + 1].style.visibility = "visible";
@@ -57,7 +57,7 @@ const CarouselTwo = ({ projects, theme }) => {
     }
   };
 
-  // When hovering over each thumbnail, show the description box
+  // When hovering over each thumbnail, show description box
   const thumbnailDesRef = useRef(null);
   const thumbnailMouseEnter = () => {
     thumbnailDesRef.current.style.display = "flex";
@@ -96,12 +96,20 @@ const CarouselTwo = ({ projects, theme }) => {
     firstThumbnail,
   ]);
 
+  useEffect(() => {
+    if (isLoading) {
+    }
+  }, []);
+
   return (
     <div className="flex justify-center items-center p-md border border-secondary bg-primary">
       <div className="w-full relative">
         {projects.map(({ title, thumbnail, slug }, i) => {
           return (
-            <div key={i} className="group/item first:relative absolute min-w-full first:visible invisible z-10 top-[0px]">
+            <div
+              key={i}
+              className="group/item first:relative absolute min-w-full first:visible invisible z-10 top-[0px]"
+            >
               {i === 0 && (
                 <div
                   ref={newWorkRef}
@@ -112,11 +120,13 @@ const CarouselTwo = ({ projects, theme }) => {
               )}
 
               <Link
-                className={`${
-                  theme === 2
-                    ? "hover:cursor-upArrowDark"
-                    : "hover:cursor-upArrow"
-                } flex justify-center aspect-[14/8]`}
+                className={`
+                  ${
+                    theme === 2
+                      ? "hover:cursor-upArrowDark"
+                      : "hover:cursor-upArrow"
+                  } 
+                  flex justify-center aspect-[14/8]`}
                 href={`/project/${encodeURIComponent(slug.current)}`}
                 onMouseEnter={() => {
                   thumbnailMouseEnter();
@@ -126,89 +136,90 @@ const CarouselTwo = ({ projects, theme }) => {
                 }}
               >
                 {thumbnail.image ? (
-                  <>
-                  {isLoading && (
+                  <div>
+                    {isLoading && (
+                      <Image
+                        src={generateLQIPUrl(thumbnail.image)}
+                        alt=""
+                        width={1000}
+                        height={1000}
+                        style={{
+                          maxWidth: "auto",
+                          height: "100%",
+                        }}
+                        className="object-contain" 
+                        quality={1} // This is for the LQIP
+                      />
+                    )}
                     <Image
-                      src={generateLQIPUrl(thumbnail.image)}
-                      alt=""
+                      ref={(element) => (thumbnailRef.current[i] = element)}
+                      src={urlFor(thumbnail.image).url()}
+                      onLoad={() => setIsLoading(false)}
                       width={1000}
                       height={1000}
                       style={{
-                        maxWidth: "",
-                        height: "",
+                        visibility: isLoading ? "hidden" : "visible",
+                        maxWidth: "auto",
+                        height: "100%",
                       }}
                       className="object-contain"
-                      quality={1} // This is for the LQIP
+                      alt=""
                     />
-                  )}
-                 <Image
-                  ref={(element) => (thumbnailRef.current[i] = element)}
-                  src={urlFor(thumbnail.image).url()}
-                  onLoad={() => setIsLoading(false)}
-                  width={1000}
-                  height={1000}
-                  style={{
-                    maxWidth: "",
-                    height: "",
-                  }}
-                  className="object-contain"
-                  alt=""
-                />
-                </>
+                  </div>
                 ) : (
-                <MuxPlayer
-                  ref={(element) => (thumbnailRef.current[i] = element)}
-                  className="h-full"
-                  loop
-                  autoPlay="muted"
-                  preload="none"
-                  streamType="on-demand"
-                  playbackId={thumbnail.video}
-                  metadata={{ video_title: title }}
-                />
+                  <MuxPlayer
+                    ref={(element) => (thumbnailRef.current[i] = element)}
+                    className="h-full"
+                    loop
+                    autoPlay="muted"
+                    preload="none"
+                    streamType="on-demand"
+                    playbackId={thumbnail.video}
+                    metadata={{ video_title: title }}
+                  />
                 )}
               </Link>
             </div>
           );
         })}
-      
-      <div className="absolute w-full h-full flex top-[0px]">
-        <div
-          className={`${leftRightStyles.divClass} ${
-            theme === 2
-              ? "hover:cursor-leftArrowDark"
-              : "hover:cursor-leftArrow"
-          }`}
-          onClick={() => {
-            prev();
-            setRunInterval(false);
-          }}
-        ></div>
-        <div className=" h-[0px] w-1/3"></div>
-        <div
-          className={`${leftRightStyles.divClass} ${
-            theme === 2
-              ? "hover:cursor-rightArrowDark"
-              : "hover:cursor-rightArrow"
-          }`}
-          onClick={() => {
-            next();
-            setRunInterval(false);
-          }}
-        ></div>
-      </div>
-      <div
-        ref={thumbnailDesRef}
-        style={{ left: `calc(${x}px + 42px)`, top: `${y}px` }}
-        className="fixed hidden p-md border border-secondary z-20 bg-primary flex-col gap-md"
-      >
-        <div className="font-sans text-sm text-secondary">
-          {currentIndex + 1}/{length}
+
+        <div className="absolute w-full h-full flex top-[0px]">
+          <div
+            className={`${leftRightStyles.divClass} ${
+              theme === 2
+                ? "hover:cursor-leftArrowDark"
+                : "hover:cursor-leftArrow"
+            }`}
+            onClick={() => {
+              prev();
+              setRunInterval(false);
+            }}
+          ></div>
+          <div className=" h-[0px] w-1/3"></div>
+          <div
+            className={`${leftRightStyles.divClass} ${
+              theme === 2
+                ? "hover:cursor-rightArrowDark"
+                : "hover:cursor-rightArrow"
+            }`}
+            onClick={() => {
+              next();
+              setRunInterval(false);
+            }}
+          ></div>
         </div>
-        <div className="font-sans text-sm text-secondary">
-          {projects[currentIndex].title}
+        <div
+          ref={thumbnailDesRef}
+          style={{ left: `calc(${x}px + 42px)`, top: `${y}px` }}
+          className="fixed hidden p-md border border-secondary z-20 bg-primary flex-col gap-md"
+        >
+          <div className="font-sans text-sm text-secondary">
+            {currentIndex + 1}/{length}
+          </div>
+          <div className="font-sans text-sm text-secondary">
+            {projects[currentIndex].title}
+          </div>
         </div>
-      </div>
       </div>
     </div>
   );
